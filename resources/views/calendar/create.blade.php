@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendar CreatePage</title>
-</head>
-<body>
+@extends('layouts.global')
+
+@section('title', 'Calendar create')
+
+@section('content')
     <h1>Crear Calendar</h1>
-</body>
-</html>
+@endsection
