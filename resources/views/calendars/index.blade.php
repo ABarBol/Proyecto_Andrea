@@ -6,12 +6,12 @@
     <h1>Todos los calendarios</h1>
     <a href="{{ route('calendars.create') }}">Crear calendar</a>
     <ul>
-        @foreach ($groups as $group)
+        @foreach ($calendars as $calendar)
             <li>
-                <a href="{{ route('calendars.show', $group->id) }}">{{ $group->name }}</a>
+                <a href="{{ route('calendars.show', $calendar->id) }}">{{ $calendar->name }}</a>
             </li>
         @endforeach
     </ul>
 
-    {{ $groups->links() }}
+    {{ $calendars->links() }}
 @endsection

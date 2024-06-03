@@ -2,41 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreGroup;
 use App\Models\Group;
 use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
-        $groups = Group::OrderBy('id','desc')->paginate();
-        return view('calendars.index', compact('groups'));
+        $calendars = Group::OrderBy('id', 'desc')->paginate();
+        return view('calendars.index', compact('calendars'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('calendars.create');
     }
 
-    public function store(Request $request){
-        $grupo = new Group();
-        $grupo->name = $request->name;
-        $grupo->save();
+    public function store(StoreGroup $request)
+    {
+        // $calendar = new Group();
+        // $calendar->name = $request->name;
+        // $calendar->save();
 
-        return redirect()->route('calendars.show', $grupo);
+        $calendar = Group::create($request->all());
+
+        return redirect()->route('calendars.show', $calendar);
     }
 
-    public function show(Group $calendar){
-        return view('calendars.show',compact('calendar'));
+    public function show(Group $calendar)
+    {
+        return view('calendars.show', compact('calendar'));
     }
 
-    public function edit(Group $group){
-        return view('calendars.edit', compact('group'));
+    public function edit(Group $calendar)
+    {
+        return view('calendars.edit', compact('calendar'));
     }
 
-    public function update(Request $request, Group $group){
-        $group->name = $request->name;
-        $group->save();
+    public function update(StoreGroup $request, Group $calendar)
+    {
 
-        return redirect()->route('calendars.show', $group);
+        $calendar->update($request->all());
+
+        return redirect()->route('calendars.show', $calendar);
+    }
+
+    public function destroy(Group $calendar)
+    {
+
+        $calendar->delete();
+
+        return redirect()->route('calendars.index');
     }
 }
