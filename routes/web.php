@@ -17,7 +17,10 @@ Route::get('/', HomeController::class);
 // Route::get('calendar/{calendar}', [CalendarController::class, 'show']);
 
 Route::controller(CalendarController::class)->group(function () {
-    Route::get('calendar', 'index');
-    Route::get('calendar/create', 'create');
-    Route::get('calendar/{calendar}', 'show');
+    Route::get('calendars', 'index')->name('calendars.index');
+    Route::get('calendars/create', 'create')->name('calendars.create');
+    Route::post('calendars/create', 'store')->name('calendars.store');
+    Route::get('calendars/{calendar}', 'show')->name('calendars.show');
+    Route::get('calendars/{group}/edit', 'edit')->name('calendars.edit');
+    Route::put('calendars/{group}/edit', 'update')->name('calendars.update');
 });
