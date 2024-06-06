@@ -31,13 +31,13 @@ class GroupController extends Controller
         return view('groups.show', compact('group'));
     }
 
-    public function edit(Group $group)
-    {
-        return view('groups.edit', compact('group'));
-    }
-
     public function update(Request $request, Group $group)
     {
+
+        $request->validate([
+            'name' => 'required',
+        ]);
+
         $group->update($request->all());
 
         return redirect()->route('groups.show', $group);
