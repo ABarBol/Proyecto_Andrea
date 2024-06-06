@@ -33,13 +33,14 @@
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 align-items-center">
                             <li class="nav-item">
                                 <a class="nav-link {{ Route::currentRouteName() === 'home.show' ? 'active' : '' }}"
-                                    aria-current="page" href="{{ route('home.show') }}"><i class="fa-solid fa-house"></i></a>
+                                    aria-current="page" href="{{ route('home.show') }}"><i
+                                        class="fa-solid fa-house"></i></a>
                             </li>
                             @if (!Auth::check())
-                            <li class="nav-item">
-                                <a class="nav-link {{ Route::currentRouteName() === 'users.index' ? 'active' : '' }}"
-                                    href="{{ route('users.index') }}">Calendario</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Route::currentRouteName() === 'users.index' ? 'active' : '' }}"
+                                        href="{{ route('users.index') }}">Calendario</a>
+                                </li>
                             @endif
                         </ul>
                         <ul class="navbar-nav justify-content-end flex-grow-1 pt-5 pt-md-0 pe-3 align-items-center ">
@@ -48,7 +49,8 @@
                                     <a class="btn btn-primary btn-block" role="button" href="#">Log in</a>
                                 </li>
                                 <li class="nav-item p-1">
-                                    <a class="btn btn-outline-secondary btn-block" role="button" href="{{ route('users.create')}}">Register</a>
+                                    <a class="btn btn-outline-secondary btn-block" role="button"
+                                        href="{{ route('users.create') }}">Register</a>
                                 </li>
                             @else
                                 <li class="nav-item p-1">
@@ -66,8 +68,8 @@
         <aside role="aside" class="container">
             <div class="pb-2 border-bottom"></div>
             <div class="row d-flex justify-content-center p-4">
-            <img src="https://ximg.es/1000x300/000/fff" class="img-fluid" alt="Responsive image">
-        </div>
+                <img src="https://ximg.es/1000x300/000/fff" class="img-fluid" alt="Responsive image">
+            </div>
         </aside>
         <footer class="footer mt-auto py-3 bg-light">
             <div class="container">
