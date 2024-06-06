@@ -6,6 +6,7 @@ use App\Http\Requests\StoreUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+
 class UserController extends Controller
 {
     public function index()
@@ -43,6 +44,9 @@ class UserController extends Controller
 
     public function update(StoreUser $request, User $user)
     {
+        if(empty($request->input('password'))) {
+            $request->merge(['password' => $user->password]);
+        }
 
         $user->update($request->all());
 

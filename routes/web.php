@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GroupController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -28,3 +29,4 @@ Route::get('/', HomeController::class)->name('home.show');
 
 // Route::resource('groups', CalendarController::class)->parameters(['groups' => 'calendar'])->names('calendars');
 Route::resource('usuarios', UserController::class)->parameters(['usuarios' => 'user'])->names('users');
+Route::resource('grupos', GroupController::class)->parameters(['grupos' => 'group'])->names('groups');

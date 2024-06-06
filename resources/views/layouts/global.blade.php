@@ -35,14 +35,10 @@
                                 <a class="nav-link {{ Route::currentRouteName() === 'home.show' ? 'active' : '' }}"
                                     aria-current="page" href="{{ route('home.show') }}"><i class="fa-solid fa-house"></i></a>
                             </li>
-                            @if (Auth::check())
+                            @if (!Auth::check())
                             <li class="nav-item">
                                 <a class="nav-link {{ Route::currentRouteName() === 'users.index' ? 'active' : '' }}"
-                                    href="{{ route('users.index') }}">Link</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ Route::currentRouteName() === 'users.create' ? 'active' : '' }}"
-                                    href="{{ route('users.create') }}">Link</a>
+                                    href="{{ route('users.index') }}">Calendario</a>
                             </li>
                             @endif
                         </ul>
@@ -52,7 +48,7 @@
                                     <a class="btn btn-primary btn-block" role="button" href="#">Log in</a>
                                 </li>
                                 <li class="nav-item p-1">
-                                    <a class="btn btn-outline-secondary btn-block" role="button" href="#">Register</a>
+                                    <a class="btn btn-outline-secondary btn-block" role="button" href="{{ route('users.create')}}">Register</a>
                                 </li>
                             @else
                                 <li class="nav-item p-1">

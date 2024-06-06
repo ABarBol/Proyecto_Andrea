@@ -1,21 +1,29 @@
 @extends('layouts.global')
 
-@section('title', 'Usuario ' . $user->name)
+@section('title', 'Grupo ' . $group->name)
 
 @section('content')
 
 
     <div class="bg-light p-5 rounded">
 
-        <h1> Bienvenido {{ $user->name }}</h1>
+        <h1> Grupo {{ $group->name }}</h1>
 
-        <h1>Perfil de {{ $user->name }} - <strong class="d-inline-block mb-2 text-primary">{{ $user->id }}</strong>
-        </h1>
-
-        <p class="lead">Este es tu espacio personal dentro de nuestra página web, puedes:</p>
-        <a class="btn btn-lg btn-primary" href="{{ route('users.edit', $user) }}" role="button">Actualizar tu perfil</a>
-        <a class="btn btn-lg btn-outline-secondary" href="/docs/5.0/components/navbar/" role="button">Ir a tu calendario</a>
+        <p class="lead">Si desea cambiar el nombre del grupo, rellene el complete el siguiente campo</p>
+        <form>
+            <div class="row align-items-center">
+                <div class="col-3">
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Nuevo nombre de grupo">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <button type="submit" class="btn btn-primary mb-2">Cambiar el nombre grupo</button>
+                </div>
+            </div>
+        </form>
     </div>
+
 
 
     <div class="bg-light p-5 rounded">
@@ -65,13 +73,13 @@
     <div class="bg-light p-5 rounded">
 
         <div class="d-flex justify-content-end pt-5">
-            <form action="{{ route('users.destroy', $user) }}" method="POST">
+            <form action="{{ route('users.destroy', $group) }}" method="POST">
 
                 @csrf
 
                 @method('delete')
 
-                <button type="submit" class="btn btn-danger">Eliminar usuario</button>
+                <button type="submit" class="btn btn-danger">Eliminar grupo</button>
             </form>
         </div>
     </div>
