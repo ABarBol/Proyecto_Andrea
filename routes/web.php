@@ -8,7 +8,7 @@ use App\Http\Controllers\CalendarController;
 //     return view('welcome');
 // });
 
-Route::get('/', HomeController::class);
+Route::get('/', HomeController::class)->name('home.show');
 
 // Route::get('calendar', [CalendarController::class, 'index']);
 
@@ -26,4 +26,5 @@ Route::get('/', HomeController::class);
 //     Route::delete('calendars/{group}', 'destroy')->name('calendars.destroy');
 // });
 
-Route::resource('pitos', CalendarController::class)->names('calendars');
+// Route::resource('groups', CalendarController::class)->parameters(['groups' => 'calendar'])->names('calendars');
+Route::resource('calendars', CalendarController::class);
