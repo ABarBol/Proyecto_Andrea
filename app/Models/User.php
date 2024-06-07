@@ -56,4 +56,14 @@ class User extends Authenticatable
             set: fn($value) => strtolower($value)
         );
     }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'users_groups');
+    }
+
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class, 'tasks_users');
+    }
 }

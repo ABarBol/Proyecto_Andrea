@@ -4,6 +4,7 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\GroupController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 
 // Route::get('/', function () {
@@ -33,4 +34,7 @@ Route::resource('usuarios', UserController::class)->parameters(['usuarios' => 'u
 Route::resource('grupos', GroupController::class)->parameters(['grupos' => 'group'])->names('groups');
 Route::resource('grupos', GroupController::class)->parameters(['grupos' => 'group'])->names('groups');
 
-Route::get('calendar/{user}', [CalendarController::class, 'index'])->name('calendar.show');
+Route::get('calendario/{user}', [CalendarController::class, 'index'])->name('calendar.show');
+Route::get('tareas/crear/{id}', [TaskController::class, 'create'])->name('tasks.create');
+Route::post('tareas/crear/{id}', [TaskController::class, 'store'])->name('tasks.store');
+

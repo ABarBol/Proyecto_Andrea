@@ -36,7 +36,7 @@
                                     aria-current="page" href="{{ route('home.show') }}"><i
                                         class="fa-solid fa-house"></i></a>
                             </li>
-                            @if (!Auth::check())
+                            @if (Auth::check())
                                 <li class="nav-item">
                                     <a class="nav-link {{ Route::currentRouteName() === 'users.index' ? 'active' : '' }}"
                                         href="{{ route('users.index') }}">Calendario</a>
@@ -44,7 +44,7 @@
                             @endif
                         </ul>
                         <ul class="navbar-nav justify-content-end flex-grow-1 pt-5 pt-md-0 pe-3 align-items-center ">
-                            @if (!Auth::check())
+                            @if (Auth::check())
                                 <li class="nav-item p-1">
                                     <a class="btn btn-primary btn-block" role="button" href="#">Log in</a>
                                 </li>

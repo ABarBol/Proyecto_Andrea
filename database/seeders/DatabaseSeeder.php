@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\UserGroup;
 use App\Models\Group;
 use App\Models\Task;
 use App\Models\User;
@@ -23,5 +24,7 @@ class DatabaseSeeder extends Seeder
         User::factory(90)->create();
         Group::factory(50)->create();
         Task::factory(50)->create();
+        UserGroup::factory(20)->create();
+
     }
 }

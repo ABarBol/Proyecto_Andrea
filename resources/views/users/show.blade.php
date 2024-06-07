@@ -14,13 +14,23 @@
 
         <p class="lead">Este es tu espacio personal dentro de nuestra página web, puedes:</p>
         <a class="btn btn-lg btn-primary" href="{{ route('users.edit', $user) }}" role="button">Actualizar tu perfil</a>
-        <a class="btn btn-lg btn-outline-secondary" href="/docs/5.0/components/navbar/" role="button">Ir a tu calendario</a>
+        <a class="btn btn-lg btn-outline-secondary" href="{{ route('calendar.show', $user) }}" role="button">Ir a tu
+            calendario</a>
     </div>
 
 
     <div class="bg-light p-5 rounded">
 
-        <h2 class="pb-3">Tareas asignadas</h2>
+        <div class="row">
+            <div class="col">
+                <h2 class="pb-3">Tareas asignadas</h2>
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-end">
+                    <a  href="{{ route('tasks.create', $user->id)}}" type="button" class="btn btn-success btn-lg"><i class="fa-solid fa-plus"></i> Tarea</a>
+                </div>
+            </div>
+        </div>
         <ul class="list-group">
             <li class="list-group-item">
                 <div class="d-flex w-100 justify-content-between">

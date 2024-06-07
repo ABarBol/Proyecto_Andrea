@@ -23,9 +23,6 @@ class UserController extends Controller
 
     public function store(StoreUser $request)
     {
-        // $user = new User();
-        // $user->name = $request->name;
-        // $user->save();
 
         $user = User::create($request->all());
 

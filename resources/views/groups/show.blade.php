@@ -25,8 +25,8 @@
                     <button type="submit" class="btn btn-primary mb-2">Cambiar el nombre grupo</button>
                 </div>
                 @error('name')
-                <small style="color:red"> {{ $message }} </small>
-            @enderror
+                    <small style="color:red"> {{ $message }} </small>
+                @enderror
             </div>
         </form>
     </div>
