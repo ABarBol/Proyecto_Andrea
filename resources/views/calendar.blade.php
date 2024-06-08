@@ -1,6 +1,6 @@
 @extends('layouts.global')
 
-@section('title', 'Home')
+@section('title', 'Calendario')
 
 @section('headContent')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

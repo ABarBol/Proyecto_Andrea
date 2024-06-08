@@ -1,6 +1,6 @@
 @extends('layouts.global')
 
-@section('title', 'Crear usuario')
+@section('title', 'Login')
 
 @section('content')
     <h1 class="pb-5">Registro</h1>
