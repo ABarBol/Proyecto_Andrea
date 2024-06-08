@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\Task;
 use App\Models\TaskUser;
 use App\Models\User;
 use App\Models\UserGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
@@ -27,17 +29,14 @@ class GroupController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|unique:groups|max:121',
+            'users'=> 'required'
+        ]);
+
         $group = Group::create([
             'name' => $request->input('name'),
         ]);
-
-        foreach ($request->input('users') as $user) {
-
-            UserGroup::create([
-                'user_id' => $user,
-                'group_id' => $group->id
-            ]);
-        }
 
         return redirect()->route('groups.show', $group);
     }
@@ -46,15 +45,16 @@ class GroupController extends Controller
     {
 
         $users = $group->users;
-        $tasksUsers = TaskUser::where('group_id', $group->id)->get();
+        $tasksUsers = TaskUser::select('task_id')->where('group_id', $group->id)->distinct()->get();
 
         $tasks = [];
         foreach ($tasksUsers as $tasksUser) {
-           $tasks[] = $tasksUser->task;
+            $tasks[] = Task::find($tasksUser->task_id);
         }
 
         return view('groups.show', compact('group', 'users', 'tasks'));
     }
+
 
     public function update(Request $request, Group $group)
     {
@@ -75,10 +75,10 @@ class GroupController extends Controller
         return redirect()->route('groups.index');
     }
 
-    public function deleteUser(int $userId, int $groupId)
+    public function deleteUser(User $user, int $groupId)
     {
         $group = Group::find($groupId);
-        $userFromGroup = UserGroup::where('user_id', $userId)->where('group_id', $groupId)->first();
+        $userFromGroup = UserGroup::where('user_id', $user->id)->where('group_id', $groupId)->first();
         $userFromGroup->delete();
         return redirect()->route('groups.show', $group);
     }
@@ -95,4 +95,5 @@ class GroupController extends Controller
 
         return redirect()->route('groups.show', $group);
     }
+
 }

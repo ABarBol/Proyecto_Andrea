@@ -18,19 +18,14 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
-    public function create()
-    {
-        return view('users.create');
-    }
 
-    public function store(StoreUser $request)
+    public function register(StoreUser $request)
     {
-
         $user = User::create($request->all());
 
         Auth::login($user);
 
-        return redirect()->route('users.show', $user)->with('success', 'Register successfully');
+        return redirect()->route('users.show', $user);
     }
 
     public function show(User $user)
@@ -70,10 +65,9 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-    public function deleteTask(int $userId, int $taskId)
+    public function deleteTask(User $user, int $taskId)
     {
-        $user = User::find($userId);
-        $taskFromUser = TaskUser::where('user_id', $userId)->where('task_id', $taskId)->first();
+        $taskFromUser = TaskUser::where('user_id', $user->id)->where('task_id', $taskId)->first();
         $taskFromUser->delete();
         return redirect()->route('users.show', $user);
     }
@@ -81,7 +75,20 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended(route('users.show', Auth::user()));
+        }
+
+        return redirect()->back()
+        ->withErrors(['login_error' => 'Usuario o contraseña incorrectos'])
+        ->withInput();
     }
 
     public function logout(Request $request)

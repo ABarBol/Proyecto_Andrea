@@ -33,22 +33,36 @@
                     </div>
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 align-items-center">
-                            <li class="nav-item">
-                                <a class="nav-link {{ Route::currentRouteName() === 'home.show' ? 'active' : '' }}"
-                                    aria-current="page" href="{{ route('home.show') }}"><i
-                                        class="fa-solid fa-house"></i></a>
-                            </li>
-                            @if (Auth::check())
+                            @guest
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Route::currentRouteName() === 'home.show' ? 'active' : '' }}"
+                                        aria-current="page" href="{{ route('home.show') }}"><i
+                                            class="fa-solid fa-house"></i></a>
+                                </li>
+                            @endguest
+                            @auth
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Route::currentRouteName() === 'users.show' ? 'active' : '' }}"
+                                        aria-current="page" href="{{ route('users.show', Auth::user()) }}"><i
+                                            class="fa-solid fa-house"></i></a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ Route::currentRouteName() === 'users.index' ? 'active' : '' }}"
-                                        href="{{ route('users.index') }}">Calendario</a>
+                                        href="{{ route('users.index') }}"><i class="fa-solid fa-users"></i></a>
                                 </li>
+                            @endauth
+                            @if (Auth::user()->admin)
+                            <li class="nav-item">
+                                <a class="nav-link {{ Route::currentRouteName() === 'groups.index' ? 'active' : '' }}"
+                                    href="{{ route('groups.index') }}"><i class="fa-solid fa-users-viewfinder"></i></a>
+                            </li>
                             @endif
                         </ul>
                         <ul class="navbar-nav justify-content-end flex-grow-1 pt-5 pt-md-0 pe-3 align-items-center ">
                             @if (!Auth::check())
                                 <li class="nav-item p-1">
-                                    <a class="btn btn-primary btn-block" role="button" href="{{route('login')}}">Log in</a>
+                                    <a class="btn btn-primary btn-block" role="button" href="{{ route('login') }}">Log
+                                        in</a>
                                 </li>
                                 <li class="nav-item p-1">
                                     <a class="btn btn-outline-secondary btn-block" role="button"
@@ -56,7 +70,8 @@
                                 </li>
                             @else
                                 <li class="nav-item p-1">
-                                    <a class="btn btn-danger btn-block" role="button" href="{{route('logout')}}">Log out</a>
+                                    <a class="btn btn-danger btn-block" role="button" href="{{ route('logout') }}">Log
+                                        out</a>
                                 </li>
                             @endif
                         </ul>

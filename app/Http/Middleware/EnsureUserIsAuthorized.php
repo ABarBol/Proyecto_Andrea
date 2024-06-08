@@ -3,11 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class Authenticate
+class EnsureUserIsAuthorized
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,13 @@ class Authenticate
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check()) {
-            // Si el usuario no está autenticado y quiere acceder a una pagina de la aplicación
-            //que existe, redirigir al login
-            return redirect('/login');
+
+        $user = $request->route('user'); // Asume que 'user' es el parámetro de ruta
+        
+        if ($user->id == Auth::id() || Auth::user()->admin) {
+            return $next($request);
         }
 
-        return $next($request);
+        return redirect()->route('users.index');
     }
 }

@@ -22,17 +22,9 @@ class StoreUser extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3'
-        ];
-    }
-
-    /**
-     * Personalices error messages
-     */
-    public function messages(): array
-    {
-        return [
-            'name.required' => 'Pon un nombre'
+            'name' => 'required|min:3',
+            'email' => 'required|email',
+            'password' => 'required|min:7'
         ];
     }
 }

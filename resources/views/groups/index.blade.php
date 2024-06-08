@@ -5,7 +5,8 @@
 @section('content')
     <h1>Administrar grupos</h1>
     <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-success btn-lg"><i class="fa-solid fa-plus"></i> Grupo</button>
+        <a href="{{ route('groups.create') }}" type="button" class="btn btn-success btn-lg"><i
+                class="fa-solid fa-plus"></i> Grupo</a>
     </div>
     <div class="my-3 p-3 bg-white rounded box-shadow">
         @foreach ($groups as $group)

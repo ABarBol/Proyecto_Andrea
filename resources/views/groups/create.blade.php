@@ -25,16 +25,22 @@
                             <label for="name">Nombre de grupo</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 value="{{ old('name') }}" placeholder="Introduzca el nombre del grupo">
+                            @error('name')
+                                <span style="color:red"> {{ $message }} </span>
+                            @enderror
                         </div>
 
                         <div class="form-group mt-3">
-                            <label for="name">Usuarios del grupo</label>
+                            <label for="users">Usuarios del grupo</label>
                             <select class="form-select js-example-basic-multiple" name="users[]" multiple="multiple">
-                                <option value="">Selecciona un grupo si quieres una tarea grupal</option>
+                                <option value=""></option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                 @endforeach
                             </select>
+                            @error('users')
+                                <span style="color:red"> {{ $message }} </span>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">Crear grupo</button>
                     </div>
@@ -42,12 +48,6 @@
             </div>
         </div>
     </div>
-
-
-    @error('name')
-        <br>
-        <span style="color:red"> {{ $message }} </span>
-    @enderror
     </form>
 
     <script>

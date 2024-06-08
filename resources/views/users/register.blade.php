@@ -10,7 +10,7 @@
                 <img class="img-fluid rounded-lg-3" src="https://ximg.es/700x700/000/fff" alt="">
             </div>
             <div class="col-6">
-                <form action="{{ route('users.store') }}" method="POST" class="d-flex justify-content-center py-5">
+                <form action="{{ route('register') }}" method="POST" class="d-flex justify-content-center py-5">
 
                     @csrf
 
@@ -22,6 +22,9 @@
                             <label for="name">Nombre de usuario</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 value="{{ old('name') }}" placeholder="Introduzca su nombre de usuario">
+                            @error('name')
+                                <span style="color:red"> {{ $message }} </span>
+                            @enderror
                         </div>
 
                         <div class="form-group mt-3">
@@ -29,11 +32,17 @@
                             <input type="email" class="form-control" id="email" name="email"
                                 value="{{ old('email') }}" aria-describedby="emailInfo" placeholder="Introduzca su email">
                             <small id="emailInfo" class="form-text text-muted">No compartiremos tu email con nadie.</small>
+                            @error('email')
+                                <span style="color:red"> {{ $message }} </span>
+                            @enderror
                         </div>
                         <div class="form-group mt-3">
                             <label for="password">Contraseña</label>
                             <input type="password" class="form-control" id="password" name="password"
                                 placeholder="Introduzca su contraseña">
+                            @error('password')
+                                <span style="color:red"> {{ $message }} </span>
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary mt-3">Registrarse</button>
@@ -42,11 +51,5 @@
             </div>
         </div>
     </div>
-
-
-    @error('name')
-        <br>
-        <span style="color:red"> {{ $message }} </span>
-    @enderror
     </form>
 @endsection

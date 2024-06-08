@@ -11,15 +11,14 @@ class CalendarController extends Controller
     /**
      * Obtiene todos los eventos de un usuario
      */
-    public function index(int $id)
+    public function index(User $user)
     {
-
-        $user = User::find($id);
 
         $events = $user->tasks->map(function ($task) {
             return [
                 'title' => $task->name,
                 'date' => $task->start,
+                'description' => $task->description,
                 'end' => $task->end,
                 'backgroundColor' => $task->color,
                 'borderColor' => $task->color,

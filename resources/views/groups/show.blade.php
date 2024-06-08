@@ -33,8 +33,19 @@
 
     <div class="bg-light p-5 rounded">
 
-        <h2 class="pb-3">Tareas asignadas</h2>
-
+        <div class="row">
+            <div class="col">
+                <h2 class="pb-3">Tareas asignadas</h2>
+            </div>
+            @if (Auth::user()->admin)
+                <div class="col">
+                    <div class="d-flex justify-content-end">
+                        <a href="{{ route('tasks.adminCreate', $group) }}" type="button" class="btn btn-success btn-lg"><i
+                                class="fa-solid fa-plus"></i> Tarea</a>
+                    </div>
+                </div>
+            @endif
+        </div>
         <ul class="list-group">
             @forelse ($tasks as $task)
                 <li class="list-group-item">
@@ -53,7 +64,7 @@
                             <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
                         </form>
                     </div>
-                    <span class="badge text-bg-{{ $task->color }} rounded-pill"><i class="fa-regular fa-calendar"></i>
+                    <span class="badge text-bg-danger rounded-pill"><i class="fa-regular fa-calendar"></i>
                         Fecha</span>
                     <small> <i class="fa-solid fa-clock text-success "></i> {{ $task->start }} <i
                             class="fa-solid fa-arrow-right"></i> <i class="fa-regular fa-clock text-danger"></i>
@@ -72,27 +83,22 @@
         <ul class="list-group">
             @forelse ($users as $user)
                 <li class="list-group-item">
-                    <div class="d-flex w-100 justify-content-between align-items-center">
-                        <h5 class="mb-1">{{ $user->name }}</h5>
-
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <h5 class="mb-1 flex-fill">{{ $user->name }}</h5>
                         <small class="mb-1 text-muted">{{ $user->email }}</small>
-                        <div class="row">
-                            <div class="col-auto">
+                        <div class="d-flex flex-row flex-wrap">
+                            <div class="p-2">
                                 <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary">Ver usuario</a>
                             </div>
-                            <div class="col-auto">
-                                <form
-                                    action="{{ route('groups.deleteUser', ['userId' => $user->id, 'groupId' => $group->id]) }}"
-                                    method="POST">
+                            <div class="p-2">
+                                <form action="{{ route('groups.deleteUser', ['user' => $user->id, 'groupId' => $group->id]) }}" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger"><i
-                                            class="fa-solid fa-trash-can"></i></button>
+                                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
                                 </form>
                             </div>
                         </div>
                     </div>
-
                 </li>
             @empty
                 <p>No hay usuarios.</p>

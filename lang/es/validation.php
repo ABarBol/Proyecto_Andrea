@@ -177,7 +177,10 @@ return [
         'date' => 'fecha',
         'time' => 'tiempo',
         'available' => 'disponible',
-        'size' => 'tamaño'
+        'size' => 'tamaño',
+        'start' => 'Fecha de inicio',
+        'end' => 'Fecha fin',
+        'users' => 'usuarios'
     ],
 
 ];
