@@ -34,10 +34,11 @@ class TaskController extends Controller
             $groupId = $request->input('group');
             $groupUsers = UserGroup::where('group_id', $groupId)->get();
 
-            foreach ($groupUsers as $user) {
+            foreach ($groupUsers as $groupUser) {
                 TaskUser::create([
                     'task_id' => $task->id,
-                    'user_id' => $user->user_id
+                    'user_id' => $groupUser->user_id,
+                    'group_id' => $groupId
                 ]);
             }
         } else {

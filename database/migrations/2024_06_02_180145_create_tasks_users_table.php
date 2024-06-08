@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('task_id');
             $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
+            $table->unsignedBigInteger('group_id')->nullable();
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +32,7 @@ return new class extends Migration
         Schema::table('users_groups', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropForeign(['taks_id']);
+            $table->dropForeign(['group_id']);
         });
 
         Schema::dropIfExists('tasks_users');

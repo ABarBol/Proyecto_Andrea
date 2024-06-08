@@ -8,6 +8,8 @@
     @vite('resources/js/app.js')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    @yield('headContent')
+
 </head>
 
 <body>
@@ -44,17 +46,17 @@
                             @endif
                         </ul>
                         <ul class="navbar-nav justify-content-end flex-grow-1 pt-5 pt-md-0 pe-3 align-items-center ">
-                            @if (Auth::check())
+                            @if (!Auth::check())
                                 <li class="nav-item p-1">
-                                    <a class="btn btn-primary btn-block" role="button" href="#">Log in</a>
+                                    <a class="btn btn-primary btn-block" role="button" href="{{route('login')}}">Log in</a>
                                 </li>
                                 <li class="nav-item p-1">
                                     <a class="btn btn-outline-secondary btn-block" role="button"
-                                        href="{{ route('users.create') }}">Register</a>
+                                        href="{{ route('register') }}">Registrarse</a>
                                 </li>
                             @else
                                 <li class="nav-item p-1">
-                                    <a class="btn btn-danger btn-block" role="button" href="#">Log out</a>
+                                    <a class="btn btn-danger btn-block" role="button" href="{{route('logout')}}">Log out</a>
                                 </li>
                             @endif
                         </ul>

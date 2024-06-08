@@ -31,73 +31,72 @@
         </form>
     </div>
 
-
-
     <div class="bg-light p-5 rounded">
 
         <h2 class="pb-3">Tareas asignadas</h2>
+
         <ul class="list-group">
-            <li class="list-group-item">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Titulo de la tarea</h5>
-                    <small class="text-muted">12/05/24 - 16/05/24</small>
-                </div>
-                <div class="d-flex w-100 justify-content-between">
-                    <p class="mb-1">Some placeholder content in a paragraph.</p>
-                    <form action="" method="POST">
+            @forelse ($tasks as $task)
+                <li class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ $task->name }}</h5>
+                        <small class="text-muted"> {{ $task->created_at }} </small>
+                    </div>
+                    <div class="d-flex w-100 justify-content-between">
+                        <p class="mb-1">{{ $task->description }}</p>
+                        <form action="{{ route('groups.deleteTask', $group->id) }}" method="POST">
 
-                        @csrf
+                            @csrf
 
-                        @method('delete')
+                            @method('delete')
 
-                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
-                    </form>
-                </div>
-                <small>Administrador</small>
-                <span class="badge bg-primary rounded-pill">Grupo</span>
-            </li>
-            <li class="list-group-item">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Titulo de la tarea</h5>
-                    <small class="text-muted">12/05/24 - 16/05/24</small>
-                </div>
-                <div class="d-flex w-100 justify-content-between">
-                    <p class="mb-1">Some placeholder content in a paragraph.</p>
-                    <form action="" method="POST">
+                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                        </form>
+                    </div>
+                    <span class="badge text-bg-{{ $task->color }} rounded-pill"><i class="fa-regular fa-calendar"></i>
+                        Fecha</span>
+                    <small> <i class="fa-solid fa-clock text-success "></i> {{ $task->start }} <i
+                            class="fa-solid fa-arrow-right"></i> <i class="fa-regular fa-clock text-danger"></i>
+                        {{ $task->end }}</small>
 
-                        @csrf
-
-                        @method('delete')
-
-                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
-                    </form>
-                </div>
-                <small>Administrador</small>
-                <span class="badge bg-primary rounded-pill">Grupo</span>
-            </li>
+                </li>
+            @empty
+                <p>No hay tareas.</p>
+            @endforelse
         </ul>
     </div>
 
-    <div class="bg-light p-5 rounded">
 
+    <div class="bg-light p-5 rounded">
         <h2 class="pb-3">Usuarios asignados</h2>
         <ul class="list-group">
-            <li class="list-group-item">
-                <div class="d-flex w-100 justify-content-between align-items-center">
-                    <h5 class="mb-1">Nombre del usuario</h5>
+            @forelse ($users as $user)
+                <li class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between align-items-center">
+                        <h5 class="mb-1">{{ $user->name }}</h5>
 
-                    <small class="mb-1 text-muted">nombredeusuario@gmail.com</small>
-                    <form action="" method="POST">
+                        <small class="mb-1 text-muted">{{ $user->email }}</small>
+                        <div class="row">
+                            <div class="col-auto">
+                                <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary">Ver usuario</a>
+                            </div>
+                            <div class="col-auto">
+                                <form
+                                    action="{{ route('groups.deleteUser', ['userId' => $user->id, 'groupId' => $group->id]) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger"><i
+                                            class="fa-solid fa-trash-can"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
-                        @csrf
-
-                        @method('delete')
-                        <a class="btn btn-primary">Ver usuario</a>
-                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
-                    </form>
-                </div>
-
-            </li>
+                </li>
+            @empty
+                <p>No hay usuarios.</p>
+            @endforelse
         </ul>
     </div>
     <div class="bg-light p-5 rounded">

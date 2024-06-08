@@ -3,14 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
-    public function index()
+    /**
+     * Obtiene todos los eventos de un usuario
+     */
+    public function index(int $id)
     {
 
-        $events = Task::get(['name as title', 'start as date', 'end', 'color as backgroundColor', 'color as borderColor']);
+        $user = User::find($id);
+
+        $events = $user->tasks->map(function ($task) {
+            return [
+                'title' => $task->name,
+                'date' => $task->start,
+                'end' => $task->end,
+                'backgroundColor' => $task->color,
+                'borderColor' => $task->color,
+            ];
+        });
+
         return view('calendar', compact('events'));
     }
 }

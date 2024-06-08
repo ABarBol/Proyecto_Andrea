@@ -9,8 +9,8 @@
         <h1 class="display-4 fw-bold lh-1">Border hero with cropped image and shadows</h1>
         <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Log in</button>
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Register</button>
+          <a href="{{route('login')}}" type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Log in</a>
+          <a href="{{route('register')}}"  type="button" class="btn btn-outline-secondary btn-lg px-4">Registrarse</a>
         </div>
       </div>
       <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden">

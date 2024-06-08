@@ -34,7 +34,7 @@ class TaskFactory extends Factory
             'end' => $end->format('Y-m-d'),
             'name' => fake()->name(),
             'description' => fake()->sentence(),
-            'color' => fake()->colorName()
+            'color' => fake()->randomElement(['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'])
         ];
     }
 }
