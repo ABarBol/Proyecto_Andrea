@@ -37,7 +37,7 @@
             <div class="col">
                 <h2 class="pb-3">Tareas asignadas</h2>
             </div>
-            @if (Auth::user()->admin)
+            @if (Auth::check() || Auth::user()->admin)
                 <div class="col">
                     <div class="d-flex justify-content-end">
                         <a href="{{ route('tasks.adminCreate', $group) }}" type="button" class="btn btn-success btn-lg"><i
@@ -55,7 +55,7 @@
                     </div>
                     <div class="d-flex w-100 justify-content-between">
                         <p class="mb-1">{{ $task->description }}</p>
-                        <form action="{{ route('groups.deleteTask', $group->id) }}" method="POST">
+                        <form action="{{ route('groups.deleteTaskG', ['group' => $group, 'taskId' => $task->id]) }}" method="POST">
 
                             @csrf
 

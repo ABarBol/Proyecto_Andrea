@@ -50,13 +50,14 @@
                                     <a class="nav-link {{ Route::currentRouteName() === 'users.index' ? 'active' : '' }}"
                                         href="{{ route('users.index') }}"><i class="fa-solid fa-users"></i></a>
                                 </li>
-                            @endauth
+                            
                             @if (Auth::user()->admin)
                             <li class="nav-item">
                                 <a class="nav-link {{ Route::currentRouteName() === 'groups.index' ? 'active' : '' }}"
                                     href="{{ route('groups.index') }}"><i class="fa-solid fa-users-viewfinder"></i></a>
                             </li>
                             @endif
+                            @endauth
                         </ul>
                         <ul class="navbar-nav justify-content-end flex-grow-1 pt-5 pt-md-0 pe-3 align-items-center ">
                             @if (!Auth::check())

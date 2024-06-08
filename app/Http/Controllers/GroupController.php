@@ -38,6 +38,14 @@ class GroupController extends Controller
             'name' => $request->input('name'),
         ]);
 
+
+        foreach ($request->input('users') as $userId) {
+            UserGroup::create([
+                'user_id' => $userId,
+                'group_id' => $group->id,
+            ]);
+        }
+
         return redirect()->route('groups.show', $group);
     }
 
@@ -83,15 +91,18 @@ class GroupController extends Controller
         return redirect()->route('groups.show', $group);
     }
 
-    public function deleteTask(int $groupId)
+    public function deleteTask(Group $group,int $taskId,)
     {
 
-        $group = Group::find($groupId);
-        $tasksFromGroup = TaskUser::where('group_id', $groupId)->get();
+        $task = Task::find($taskId);
+
+        $tasksFromGroup = TaskUser::where('task_id', $taskId)->get();
 
         foreach ($tasksFromGroup as $taskFromGroup) {
             $taskFromGroup->delete();
         }
+
+        $task->delete();
 
         return redirect()->route('groups.show', $group);
     }

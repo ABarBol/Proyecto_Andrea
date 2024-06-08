@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUser;
 use App\Models\Group;
+use App\Models\Task;
 use App\Models\TaskUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+use function PHPUnit\Framework\isNull;
 
 class UserController extends Controller
 {
@@ -68,7 +71,14 @@ class UserController extends Controller
     public function deleteTask(User $user, int $taskId)
     {
         $taskFromUser = TaskUser::where('user_id', $user->id)->where('task_id', $taskId)->first();
-        $taskFromUser->delete();
+
+        if (is_null($taskFromUser->group_id)) {
+            $task = Task::find($taskFromUser->task_id);
+            $task->delete();
+        } else {
+            $taskFromUser->delete();
+        }
+
         return redirect()->route('users.show', $user);
     }
 
@@ -87,8 +97,8 @@ class UserController extends Controller
         }
 
         return redirect()->back()
-        ->withErrors(['login_error' => 'Usuario o contraseña incorrectos'])
-        ->withInput();
+            ->withErrors(['login_error' => 'Usuario o contraseña incorrectos'])
+            ->withInput();
     }
 
     public function logout(Request $request)
