@@ -50,22 +50,42 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(StoreUser $request, User $user)
+    public function update(Request $request, User $user)
     {
         if (empty($request->input('password'))) {
             $request->merge(['password' => $user->password]);
         }
 
+
+        $request->validate([
+            'name' => 'required',
+            'email'=> 'required|email|unique:users,email,' . $user->id,
+            'password' => 'required|min:7'
+        ]);
+
+        
         $user->update($request->all());
 
         return redirect()->route('users.show', $user);
     }
 
-    public function destroy(User $user)
+    public function destroy(User $user, Request $request)
     {
-        dd('quiero vaquero');
-        $user->delete();
-        return redirect()->route('users.index');
+
+        if ($user->id != 1) {
+            $user->delete();
+
+            if (Auth::user()->admin) {
+                return redirect()->route('users.index');
+            } else {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return redirect()->route('home.show');
+            }
+        }
+
+        return redirect()->route('users.show', Auth::user())->withErrors(['msg' => 'El administrador no puede borrarse a sí mismo']);
     }
 
     public function deleteTask(User $user, int $taskId)

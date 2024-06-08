@@ -12,12 +12,12 @@
     <h1 class="pb-5">Nuevo grupo</h1>
     <div class="container">
         <div class="row border rounded bg-light d-flex justify-content-center py-5">
-            <div class="col-6">
+            <div class="col-12">
                 <form action="{{ route('groups.store') }}" method="POST" class="d-flex justify-content-center py-5">
 
                     @csrf
 
-                    <div class="col-8">
+                    <div class="col-12 col-md-6 col-lg-3" >
                         <div class="d-flex justify-content-center pb-5">
                             <i class="fa-solid fa-people-group fa-4x text-primary"></i>
                         </div>

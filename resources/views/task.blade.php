@@ -7,8 +7,9 @@
     <h1 class="pb-5">Nueva Tarea</h1>
     <div class="container">
         <div class="row border rounded bg-light d-flex justify-content-center">
-            <div class="col-7">
-                <form action="{{ isset($user) ? route('tasks.store', $user) : route('tasks.storeGroup', $group) }}" method="POST" class="d-flex justify-content-center py-5">
+            <div class="col-12 col-md-6">
+                <form action="{{ isset($user) ? route('tasks.store', $user) : route('tasks.storeGroup', $group) }}"
+                    method="POST" class="d-flex justify-content-center py-5">
 
                     @csrf
 
@@ -45,7 +46,7 @@
 
                         <div class="form-group mt-3">
                             <label for="description">Descripción de la tarea</label>
-                            <textarea class="form-control text-align-start" id="description" name="description">Describa su tarea</textarea>
+                            <textarea class="form-control text-align-start" id="description" name="description" placeholder="Describa su tarea">{{ old('description') }}</textarea>
                         </div>
                         @error('description')
                             <span style="color:red"> {{ $message }} </span>
@@ -58,8 +59,7 @@
                                     @foreach ($groups as $group)
                                         <option value="{{ $group->id }}">{{ $group->name }}</option>
                                     @endforeach
-                                @endisset
-                                @isset($group)
+                                @else
                                     <option value="{{ $group->id }}">{{ $group->name }}</option>
                                 @endisset
                             </select>

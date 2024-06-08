@@ -6,10 +6,10 @@
     <h1 class="pb-5">Registro</h1>
     <div class="container">
         <div class="row border rounded bg-light">
-            <div class="col-6">
+            <div class="col-12 col-md-6">
                 <img class="img-fluid rounded-lg-3" src="https://ximg.es/700x700/000/fff" alt="">
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6">
                 <form action="{{ route('login') }}" method="POST" class="d-flex justify-content-center py-5">
 
                     @csrf

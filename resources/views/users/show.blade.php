@@ -4,6 +4,13 @@
 
 @section('content')
 
+@error('msg')
+<div class="alert alert-danger" role="alert">
+    {{ $message }}
+  </div>
+@enderror
+
+
 
     <div class="bg-light p-5 rounded">
         @if (Auth::user()->id == $user->id)

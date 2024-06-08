@@ -55,7 +55,8 @@
                     </div>
                     <div class="d-flex w-100 justify-content-between">
                         <p class="mb-1">{{ $task->description }}</p>
-                        <form action="{{ route('groups.deleteTaskG', ['group' => $group, 'taskId' => $task->id]) }}" method="POST">
+                        <form action="{{ route('groups.deleteTaskG', ['group' => $group, 'taskId' => $task->id]) }}"
+                            method="POST">
 
                             @csrf
 
@@ -86,18 +87,23 @@
                     <div class="d-flex justify-content-between align-items-center flex-wrap">
                         <h5 class="mb-1 flex-fill">{{ $user->name }}</h5>
                         <small class="mb-1 text-muted">{{ $user->email }}</small>
-                        <div class="d-flex flex-row flex-wrap">
-                            <div class="p-2">
-                                <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary">Ver usuario</a>
+                        @if (Auth::user()->admin)
+                            <div class="d-flex flex-row flex-wrap">
+                                <div class="p-2">
+                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary">Ver usuario</a>
+                                </div>
+                                <div class="p-2">
+                                    <form
+                                        action="{{ route('groups.deleteUser', ['user' => $user->id, 'groupId' => $group->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger"><i
+                                                class="fa-solid fa-trash-can"></i></button>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="p-2">
-                                <form action="{{ route('groups.deleteUser', ['user' => $user->id, 'groupId' => $group->id]) }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
-                                </form>
-                            </div>
-                        </div>
+                        @endif
                     </div>
                 </li>
             @empty
