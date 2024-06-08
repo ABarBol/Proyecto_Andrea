@@ -1,6 +1,6 @@
 @extends('layouts.global')
 
-@section('title', 'Home')
+@section('title', 'Página principal')
 
 @section('content')
 <div class="container">
