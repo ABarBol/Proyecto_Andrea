@@ -18,7 +18,21 @@ class UserController extends Controller
     {
 
         $users = User::OrderBy('id', 'desc')->paginate();
-        return view('users.index', compact('users'));
+        $allUsers = User::all();
+        return view('users.index', compact('users', 'allUsers'));
+    }
+
+    public function search(Request $request, User $user)
+    {
+
+        if (isset($request->user_id)) {
+            $foundUsesr = User::find($request->user_id);
+            return redirect()->route('users.show', $foundUsesr);
+        }
+
+        $users = User::OrderBy('id', 'desc')->paginate();
+        $allUsers = User::all();
+        return view('users.index', compact('users', 'allUsers'));
     }
 
 

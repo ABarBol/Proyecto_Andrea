@@ -40,6 +40,8 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::put('usuarios/{user}', 'update')->name('users.update')->middleware(EnsureUserIsAuthorized::class);
         Route::delete('usuarios/{user}', 'destroy')->name('users.destroy')->middleware(EnsureUserIsAuthorized::class);
     });
+    Route::delete('usuarios/{user}/{taskId}', [UserController::class, 'deleteTask'])->name('users.deleteTask')->middleware(EnsureUserIsAuthorized::class);
+    Route::post('search/{user}', [UserController::class, 'search'])->name('users.search')->middleware(EnsureUserIsAuthorized::class);
 
     // Route::resource('usuarios', UserController::class)->parameters(['usuarios' => 'user'])->names('users')->middleware(EnsureUserIsAuthorized::class);
     Route::resource('grupos', GroupController::class)->parameters(['grupos' => 'group'])->names('groups')->middleware(IsAdminOrAuth::class);
@@ -55,5 +57,4 @@ Route::middleware([Authenticate::class])->group(function () {
 
 
 
-    Route::delete('usuarios/{user}/{taskId}', [UserController::class, 'deleteTask'])->name('users.deleteTask')->middleware(EnsureUserIsAuthorized::class);
 });

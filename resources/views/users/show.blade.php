@@ -10,8 +10,6 @@
   </div>
 @enderror
 
-
-
     <div class="bg-light p-5 rounded">
         @if (Auth::user()->id == $user->id)
             <h1> Bienvenido {{ $user->name }}</h1>
