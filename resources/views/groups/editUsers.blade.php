@@ -45,7 +45,7 @@
                                 <span style="color:red"> {{ $message }} </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Añadur usuarios</button>
+                        <button type="submit" class="btn btn-primary mt-3">Añadir usuarios</button>
                     </div>
                 </form>
             </div>
