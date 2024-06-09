@@ -50,13 +50,14 @@
                                     <a class="nav-link {{ Route::currentRouteName() === 'users.index' ? 'active' : '' }}"
                                         href="{{ route('users.index') }}"><i class="fa-solid fa-users"></i></a>
                                 </li>
-                            
-                            @if (Auth::user()->admin)
-                            <li class="nav-item">
-                                <a class="nav-link {{ Route::currentRouteName() === 'groups.index' ? 'active' : '' }}"
-                                    href="{{ route('groups.index') }}"><i class="fa-solid fa-users-viewfinder"></i></a>
-                            </li>
-                            @endif
+
+                                @if (Auth::user()->admin)
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ Route::currentRouteName() === 'groups.index' ? 'active' : '' }}"
+                                            href="{{ route('groups.index') }}"><i
+                                                class="fa-solid fa-users-viewfinder"></i></a>
+                                    </li>
+                                @endif
                             @endauth
                         </ul>
                         <ul class="navbar-nav justify-content-end flex-grow-1 pt-5 pt-md-0 pe-3 align-items-center ">
@@ -91,7 +92,12 @@
         </aside>
         <footer class="footer mt-auto py-3 bg-light">
             <div class="container">
-                <span class="text-muted">@ Andrea Barros Bólico</span>
+                <h5>Política de Privacidad y Seguridad.</h5>
+                <p><strong> Scheduly</strong> es una aplicación diseñada para uso interno, el administrador puede reservarse el derecho de inspeccionar y
+                    modificar la información del usuarios para asegurar el
+                    correcto funcionamiento de la página, pudiendo incluso, reestablecer contraseñas.</b>
+                <p>Estas medidas permiten mantener una página segura y funcional.</p>
+                <span class="text-muted">© 2024 Scheduly, S.A</span>
             </div>
         </footer>
     </div>

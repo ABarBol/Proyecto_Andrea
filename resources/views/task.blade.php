@@ -30,12 +30,13 @@
                             @enderror
                             <div class="col">
                                 <label for="end">Fecha de fin de la tarea</label>
-                                <input type="date" class="form-control" id="end" name="end"
+                                <input type="date" class="form-control"  aria-describedby="endInfo" id="end" name="end"
                                     value="{{ old('end') }}">
                             </div>
                             @error('end')
                                 <span style="color:red"> {{ $message }} </span>
                             @enderror
+                            <small id="endInfo" class="form-text text-muted">El campo fecha fin no es obligatorio</small>
                         </div>
 
                         <div class="form-group mt-3">
