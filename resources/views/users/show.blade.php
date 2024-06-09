@@ -4,11 +4,11 @@
 
 @section('content')
 
-@error('msg')
-<div class="alert alert-danger" role="alert">
-    {{ $message }}
-  </div>
-@enderror
+    @error('msg')
+        <div class="alert alert-danger" role="alert">
+            {{ $message }}
+        </div>
+    @enderror
 
     <div class="bg-light p-5 rounded">
         @if (Auth::user()->id == $user->id)
@@ -19,17 +19,18 @@
         @endif
 
         @if (Auth::user()->id == $user->id)
-        <p class="lead">Este es tu espacio personal dentro de nuestra página web, puedes:</p>
-        <a class="btn btn-lg btn-primary" href="{{ route('users.edit', $user) }}" role="button">Actualizar tu perfil</a>
-        <a class="btn btn-lg btn-outline-secondary" href="{{ route('calendar.show', $user->id) }}" role="button">Ir a tu
-            calendario</a>
+            <p class="lead">Este es tu espacio personal dentro de nuestra página web, puedes:</p>
+            <a class="btn btn-lg btn-primary" href="{{ route('users.edit', $user) }}" role="button">Actualizar tu perfil</a>
+            <a class="btn btn-lg btn-outline-secondary" href="{{ route('calendar.show', $user->id) }}" role="button">Ir a tu
+                calendario</a>
         @elseif (Auth::user()->admin)
-        <p class="lead">Administración de usuario</p>
-        <a class="btn btn-lg btn-primary" href="{{ route('users.edit', $user) }}" role="button">Editar perfil</a>
-        <a class="btn btn-lg btn-outline-secondary" href="{{ route('calendar.show', $user->id) }}" role="button">Revisar Calendario</a>
+            <p class="lead">Administración de usuario</p>
+            <a class="btn btn-lg btn-primary" href="{{ route('users.edit', $user) }}" role="button">Editar perfil</a>
+            <a class="btn btn-lg btn-outline-secondary" href="{{ route('calendar.show', $user->id) }}"
+                role="button">Revisar Calendario</a>
         @endif
 
-        
+
     </div>
 
 
@@ -39,14 +40,12 @@
             <div class="col">
                 <h2 class="pb-3">Tareas asignadas</h2>
             </div>
-            @if (Auth::user()->admin || Auth::user()->id == $user->id)
-                <div class="col">
-                    <div class="d-flex justify-content-end">
-                        <a href="{{ route('tasks.create', $user->id) }}" type="button" class="btn btn-success btn-lg"><i
-                                class="fa-solid fa-plus"></i> Tarea</a>
-                    </div>
+            <div class="col">
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('tasks.create', $user->id) }}" type="button" class="btn btn-success btn-lg"><i
+                            class="fa-solid fa-plus"></i> Tarea</a>
                 </div>
-            @endif
+            </div>
         </div>
         <ul class="list-group">
             @forelse ($tasks as $task)
@@ -87,18 +86,52 @@
             @endforelse
         </ul>
     </div>
-    @if (Auth::user()->admin || Auth::user()->id == $user->id)
-        <div class="bg-light p-5 rounded">
-            <div class="d-flex justify-content-end pt-5">
-                <form action="{{ route('users.destroy', $user) }}" method="POST">
+    <div class="bg-light p-5 rounded">
 
-                    @csrf
-
-                    @method('delete')
-
-                    <button type="submit" class="btn btn-danger">Eliminar usuario</button>
-                </form>
+        <div class="row">
+            <div class="col">
+                <small>Los grupos solo te los puede asignar el administrador</small>
+                <h2 class="pb-3">Grupos asignados</h2>
             </div>
         </div>
-    @endif
+        <ul class="list-group">
+            @forelse ($groups as $group)
+                <li class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <div>
+                            <h5 class="mb-1">{{ $group->name }}</h5>
+                        </div>
+                        <a href="{{ route('groups.show', $group) }}" type="button"
+                        class="btn btn-outline-info">Ver grupo
+                    </a>
+                    @if (Auth::user()->admin)
+                        <form action="{{ route('groups.deleteUser', ['user' => $user, 'groupId' => $group->id]) }}"
+                            method="POST">
+
+                            @csrf
+
+                            @method('delete')
+
+                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                        </form>
+                    </div>
+                    @endif
+                </li>
+            @empty
+                <p>No hay grupos.</p>
+            @endforelse
+        </ul>
+    </div>
+    <div class="bg-light p-5 rounded">
+        <div class="d-flex justify-content-end pt-5">
+            <form action="{{ route('users.destroy', $user) }}" method="POST">
+
+                @csrf
+
+                @method('delete')
+
+                <button type="submit" class="btn btn-danger">Eliminar usuario</button>
+            </form>
+        </div>
+    </div>
 @endsection

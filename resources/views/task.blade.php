@@ -30,8 +30,8 @@
                             @enderror
                             <div class="col">
                                 <label for="end">Fecha de fin de la tarea</label>
-                                <input type="date" class="form-control"  aria-describedby="endInfo" id="end" name="end"
-                                    value="{{ old('end') }}">
+                                <input type="date" class="form-control" aria-describedby="endInfo" id="end"
+                                    name="end" value="{{ old('end') }}">
                             </div>
                             @error('end')
                                 <span style="color:red"> {{ $message }} </span>

@@ -19,11 +19,15 @@ class IsAdminOrAuth
         if (Auth::user()->admin) {
             return $next($request);
         } else {
-            Auth::user()->groups;
-
             foreach (Auth::user()->groups as $group) {
-                if ($group->id == $request->group->id) {
-                    return $next($request);
+                if (is_object($request->group)) {
+                    if ($group->id == $request->group->id) {
+                        return $next($request);
+                    }
+                } else {
+                    if ($group->id == $request->group) {
+                        return $next($request);
+                    }
                 }
             }
         }

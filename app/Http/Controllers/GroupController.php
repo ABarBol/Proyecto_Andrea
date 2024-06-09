@@ -31,7 +31,7 @@ class GroupController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:groups|max:121',
-            'users'=> 'required'
+            'users' => 'required'
         ]);
 
         $group = Group::create([
@@ -68,7 +68,37 @@ class GroupController extends Controller
     {
 
         $request->validate([
+            'name' => 'required|unique:groups|max:121',
+            'users' => 'required'
+        ]);
+
+        $group = Group::create([
+            'name' => $request->input('name'),
+        ]);
+
+
+        foreach ($request->input('users') as $userId) {
+            UserGroup::create([
+                'user_id' => $userId,
+                'group_id' => $group->id,
+            ]);
+        }
+
+        return redirect()->route('groups.show', $group);
+    }
+
+    public function editUsersGroup(Request $request, Group $group)
+    {
+
+        return view('groups.show', compact('group'));
+    }
+
+    public function updateUsersGroup(Request $request, Group $group)
+    {
+
+        $request->validate([
             'name' => 'required',
+            'users' => 'required|array'
         ]);
 
         $group->update($request->all());
@@ -91,7 +121,7 @@ class GroupController extends Controller
         return redirect()->route('groups.show', $group);
     }
 
-    public function deleteTask(Group $group,int $taskId,)
+    public function deleteTask(Group $group, int $taskId)
     {
 
         $task = Task::find($taskId);
@@ -107,4 +137,31 @@ class GroupController extends Controller
         return redirect()->route('groups.show', $group);
     }
 
+    public function editUsers(Group $group)
+    {
+
+        $oldUsers = $group->users;
+        $users = User::all();
+
+        return view('groups.editUsers', compact('group', 'users', 'oldUsers'));
+    }
+
+    public function updateUsers(Request $request, Group $group)
+    {
+
+        $request->validate([
+            'users' => 'required|array',
+        ]);
+
+        foreach ($request->input('users') as $userId) {
+            UserGroup::updateOrCreate(
+                [
+                    'user_id' => $userId,
+                    'group_id' => $group->id,
+                ]
+            );
+        }
+
+        return redirect()->route('groups.show', $group);
+    }
 }

@@ -7,6 +7,7 @@ use App\Models\Group;
 use App\Models\Task;
 use App\Models\TaskUser;
 use App\Models\User;
+use App\Models\UserGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,8 +56,10 @@ class UserController extends Controller
 
             return $task;
         });
+        
+        $groups = $user->groups;
 
-        return view('users.show', compact('user', 'tasks'));
+        return view('users.show', compact('user', 'tasks', 'groups'));
     }
 
     public function edit(User $user)

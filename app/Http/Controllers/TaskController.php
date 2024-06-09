@@ -8,6 +8,7 @@ use App\Models\TaskUser;
 use App\Models\User;
 use App\Models\UserGroup;
 use Illuminate\Http\Request;
+use Mockery\Matcher\Any;
 
 class TaskController extends Controller
 {
@@ -38,6 +39,12 @@ class TaskController extends Controller
             'description' => $request->input('description'),
             'color' => fake()->randomElement(['blue', 'indigo', 'purple', 'red', 'orange', 'green', 'brown'])
         ]);
+
+
+
+        if(!is_object($group) && is_int($group)) {
+            $group = Group::find($group);
+        }
 
         $userGroups = $group->users;
 

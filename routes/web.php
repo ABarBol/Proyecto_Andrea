@@ -46,7 +46,15 @@ Route::middleware([Authenticate::class])->group(function () {
     // Route::resource('usuarios', UserController::class)->parameters(['usuarios' => 'user'])->names('users')->middleware(EnsureUserIsAuthorized::class);
     Route::resource('grupos', GroupController::class)->parameters(['grupos' => 'group'])->names('groups')->middleware(IsAdminOrAuth::class);
     Route::delete('grupos/{user}/{groupId}/user', [GroupController::class, 'deleteUser'])->name('groups.deleteUser')->middleware(IsAdmin::class);
-    Route::delete('grupos/{group}/{taskId}/task', [GroupController::class, 'deleteTask'])->name('groups.deleteTaskG')->middleware(IsAdmin::class);
+    Route::delete('grupos/{group}/{taskId}/task', [GroupController::class, 'deleteTask'])->name('groups.deleteTaskG')->middleware(IsAdminOrAuth::class);
+    
+    
+    Route::get('/grupos/{group}/editUsers', [GroupController::class, 'editUsers'])->name('groups.editUsers')->middleware(IsAdmin::class);
+    Route::post('/grupos/{group}/updateUsers', [GroupController::class, 'updateUsers'])->name('groups.updateUsers')->middleware(IsAdmin::class);
+    
+
+
+
 
     Route::get('calendario/{user}', [CalendarController::class, 'index'])->name('calendar.show')->middleware(EnsureUserIsAuthorized::class);
 

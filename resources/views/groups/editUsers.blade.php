@@ -1,6 +1,6 @@
 @extends('layouts.global')
 
-@section('title', 'Crear usuario')
+@section('title', 'Añadir usuarios')
 
 @section('headContent')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -9,11 +9,11 @@
 @endsection
 
 @section('content')
-    <h1 class="pb-5">Nuevo grupo</h1>
+    <h1 class="pb-5">Editar grupo</h1>
     <div class="container">
         <div class="row border rounded bg-light d-flex justify-content-center py-5">
             <div class="col-12">
-                <form action="{{ route('groups.store') }}" method="POST" class="d-flex justify-content-center py-5">
+                <form action="{{ route('groups.updateUsers', $group) }}" method="POST" class="d-flex justify-content-center py-5">
 
                     @csrf
 
@@ -24,7 +24,7 @@
                         <div class="form-group mt-3">
                             <label for="name">Nombre de grupo</label>
                             <input type="text" class="form-control" id="name" name="name"
-                                value="{{ old('name') }}" placeholder="Introduzca el nombre del grupo">
+                                value="{{ $group->name }}" disabled>
                             @error('name')
                                 <span style="color:red"> {{ $message }} </span>
                             @enderror
@@ -36,7 +36,7 @@
                                 <option value=""></option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}"
-                                        {{ in_array($user->id, old('users', [])) ? 'selected' : '' }}>
+                                        {{ collect(old('users', $oldUsers->pluck('id')))->contains($user->id) ? 'selected' : '' }}>
                                         {{ $user->name }}
                                     </option>
                                 @endforeach
@@ -45,7 +45,7 @@
                                 <span style="color:red"> {{ $message }} </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Crear grupo</button>
+                        <button type="submit" class="btn btn-primary mt-3">Añadur usuarios</button>
                     </div>
                 </form>
             </div>

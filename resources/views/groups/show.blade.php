@@ -37,14 +37,12 @@
             <div class="col">
                 <h2 class="pb-3">Tareas asignadas</h2>
             </div>
-            @if (Auth::check() || Auth::user()->admin)
-                <div class="col">
-                    <div class="d-flex justify-content-end">
-                        <a href="{{ route('tasks.adminCreate', $group) }}" type="button" class="btn btn-success btn-lg"><i
-                                class="fa-solid fa-plus"></i> Tarea</a>
-                    </div>
+            <div class="col">
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('tasks.adminCreate', $group) }}" type="button" class="btn btn-success btn-lg"><i
+                            class="fa-solid fa-plus"></i> Tarea</a>
                 </div>
-            @endif
+            </div>
         </div>
         <ul class="list-group">
             @forelse ($tasks as $task)
@@ -110,11 +108,19 @@
                 <p>No hay usuarios.</p>
             @endforelse
         </ul>
+        @if (Auth::check() && Auth::user()->admin)
+            <div class="col mt-3">
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('groups.editUsers', $group) }}" type="button" class="btn btn-success btn-lg"><i
+                            class="fa-solid fa-plus"></i> Usuario</a>
+                </div>
+            </div>
+        @endif
     </div>
     <div class="bg-light p-5 rounded">
 
         <div class="d-flex justify-content-end pt-5">
-            <form action="{{ route('users.destroy', $group) }}" method="POST">
+            <form action="{{ route('groups.destroy', $group) }}" method="POST">
 
                 @csrf
 

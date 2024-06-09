@@ -18,7 +18,7 @@ class Authenticate
     {
         if (!Auth::check()) {
             // Si el usuario no está autenticado y quiere acceder a una pagina de la aplicación
-            //que existe, redirigir al login
+            //redirigir al login
             return redirect('/login');
         }
 
