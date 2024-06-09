@@ -33,6 +33,9 @@
                                 <input type="date" class="form-control" id="end" name="end"
                                     value="{{ old('end') }}">
                             </div>
+                            @error('end')
+                                <span style="color:red"> {{ $message }} </span>
+                            @enderror
                         </div>
 
                         <div class="form-group mt-3">
