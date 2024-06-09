@@ -66,23 +66,13 @@ class GroupController extends Controller
 
     public function update(Request $request, Group $group)
     {
-
         $request->validate([
-            'name' => 'required|unique:groups|max:121',
-            'users' => 'required'
+            'name' => 'required|unique:groups,name,' . $group->id . '|max:121',
         ]);
 
-        $group = Group::create([
+        $group->update([
             'name' => $request->input('name'),
         ]);
-
-
-        foreach ($request->input('users') as $userId) {
-            UserGroup::create([
-                'user_id' => $userId,
-                'group_id' => $group->id,
-            ]);
-        }
 
         return redirect()->route('groups.show', $group);
     }
@@ -91,19 +81,6 @@ class GroupController extends Controller
     {
 
         return view('groups.show', compact('group'));
-    }
-
-    public function updateUsersGroup(Request $request, Group $group)
-    {
-
-        $request->validate([
-            'name' => 'required',
-            'users' => 'required|array'
-        ]);
-
-        $group->update($request->all());
-
-        return redirect()->route('groups.show', $group);
     }
 
     public function destroy(Group $group, User $user)
