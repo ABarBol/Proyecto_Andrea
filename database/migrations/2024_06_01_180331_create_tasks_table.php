@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->date('start');
-            $table->date('end');
+            $table->date('end')->nullable();
             $table->string('name');
             $table->text('description');
             $table->text('color');
