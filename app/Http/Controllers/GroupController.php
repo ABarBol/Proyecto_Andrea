@@ -139,6 +139,21 @@ class GroupController extends Controller
             );
         }
 
+        $tasks = TaskUser::select('task_id')->where('group_id', $group->id)->distinct()->get();
+
+        foreach ($tasks as $task) {
+            foreach ($request->input('users') as $userId) {
+                TaskUser::updateOrCreate(
+                    [
+                        'user_id' => $userId,
+                        'task_id' => $task->task_id,
+                        'group_id'=> $group->id
+                    ]
+                );
+            }
+        }
+
+
         return redirect()->route('groups.show', $group);
     }
 }

@@ -56,7 +56,7 @@ class UserController extends Controller
 
             return $task;
         });
-        
+
         $groups = $user->groups;
 
         return view('users.show', compact('user', 'tasks', 'groups'));
@@ -76,11 +76,18 @@ class UserController extends Controller
 
         $request->validate([
             'name' => 'required',
-            'email'=> 'required|email|unique:users,email,' . $user->id,
-            'password' => 'required|min:7'
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => [
+                'required',
+                'min:7', 
+                'regex:/[a-z]/', 
+                'regex:/[A-Z]/', 
+                'regex:/[0-9]/', 
+                'regex:/[@$!%*#?&]/'
+            ]
         ]);
 
-        
+
         $user->update($request->all());
 
         return redirect()->route('users.show', $user);

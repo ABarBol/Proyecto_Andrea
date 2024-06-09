@@ -24,7 +24,14 @@ class StoreUser extends FormRequest
         return [
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:7'
+            'password' => [
+                'required',
+                'min:7',
+                'regex:/[a-z]/',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*#?&]/'
+            ]
         ];
     }
 }
