@@ -32,7 +32,7 @@
           <div class="col">
             <i class="fa-solid fa-hand-point-up fa-3x text-primary mb-3"></i>
             <h2>Tú decides</h2>
-            <p>Las tareas grupales están disponibles para todos los miembros grupo, pero puedes borrarlas de tu perfil.</p>
+            <p>Las tareas grupales están disponibles para todos los miembros del grupo, pero puedes borrarlas de tu perfil.</p>
           </div>
           <div class="col">
             <i class="fa-solid fa-hammer fa-3x text-primary mb-3"></i>
