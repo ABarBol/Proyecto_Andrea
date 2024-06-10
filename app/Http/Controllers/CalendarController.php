@@ -6,10 +6,13 @@ use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+/**
+ * This is the user's calendar controller.
+ */
 class CalendarController extends Controller
 {
     /**
-     * Obtiene todos los eventos de un usuario
+     * Gets all events for a user
      */
     public function index(User $user)
     {
