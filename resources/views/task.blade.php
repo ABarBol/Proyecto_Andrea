@@ -26,7 +26,7 @@
                                     value="{{ old('start') }}">
                             </div>
                             @error('start')
-                                <span style="color:red"> {{ $message }} </span>
+                                <span class="text-danger"> {{ $message }} </span>
                             @enderror
                             <div class="col">
                                 <label for="end">Fecha de fin de la tarea</label>
@@ -34,7 +34,7 @@
                                     name="end" value="{{ old('end') }}">
                             </div>
                             @error('end')
-                                <span style="color:red"> {{ $message }} </span>
+                                <span class="text-danger"> {{ $message }} </span>
                             @enderror
                             <small id="endInfo" class="form-text text-muted">El campo fecha fin no es obligatorio</small>
                         </div>
@@ -44,7 +44,7 @@
                             <input type="name" class="form-control" id="name" name="name"
                                 value="{{ old('name') }}" placeholder="Introduzca su nombre">
                             @error('name')
-                                <span style="color:red"> {{ $message }} </span>
+                                <span class="text-danger"> {{ $message }} </span>
                             @enderror
                         </div>
 
@@ -53,7 +53,7 @@
                             <textarea class="form-control text-align-start" id="description" name="description" placeholder="Describa su tarea">{{ old('description') }}</textarea>
                         </div>
                         @error('description')
-                            <span style="color:red"> {{ $message }} </span>
+                            <span class="text-danger"> {{ $message }} </span>
                         @enderror
                         <div class="form-group mt-3">
                             <label for="group">Grupo: </label>

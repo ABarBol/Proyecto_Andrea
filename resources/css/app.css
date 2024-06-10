@@ -1,4 +1,6 @@
-
+/**
+* This CSS controls how the calendar appears in the profile.
+**/
 :root {
     --fc-small-font-size: .85em;
     --fc-page-bg-color: #fff;

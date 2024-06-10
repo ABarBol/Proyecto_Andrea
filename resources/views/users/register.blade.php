@@ -23,7 +23,7 @@
                             <input type="text" class="form-control" id="name" name="name"
                                 value="{{ old('name') }}" placeholder="Introduzca su nombre de usuario">
                             @error('name')
-                                <span style="color:red"> {{ $message }} </span>
+                                <span class="text-danger"> {{ $message }} </span>
                             @enderror
                         </div>
 
@@ -33,7 +33,7 @@
                                 value="{{ old('email') }}" aria-describedby="emailInfo" placeholder="Introduzca su email">
                             <small id="emailInfo" class="form-text text-muted">No compartiremos tu email con nadie.</small>
                             @error('email')
-                                <span style="color:red"> {{ $message }} </span>
+                                <span class="text-danger"> {{ $message }} </span>
                             @enderror
                         </div>
                         <div class="form-group mt-3">
@@ -41,7 +41,7 @@
                             <input type="password" class="form-control" id="password" name="password"
                                 placeholder="Introduzca su contraseña">
                             @error('password')
-                                <span style="color:red"> {{ $message }} </span>
+                                <span class="text-danger"> {{ $message }} </span>
                             @enderror
                         </div>
 

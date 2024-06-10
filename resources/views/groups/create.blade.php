@@ -26,7 +26,7 @@
                             <input type="text" class="form-control" id="name" name="name"
                                 value="{{ old('name') }}" placeholder="Introduzca el nombre del grupo">
                             @error('name')
-                                <span style="color:red"> {{ $message }} </span>
+                                <span class="text-danger"> {{ $message }} </span>
                             @enderror
                         </div>
 
@@ -42,7 +42,7 @@
                                 @endforeach
                             </select>
                             @error('users')
-                                <span style="color:red"> {{ $message }} </span>
+                                <span class="text-danger"> {{ $message }} </span>
                             @enderror
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">Crear grupo</button>
