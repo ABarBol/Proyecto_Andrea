@@ -8,22 +8,46 @@ use App\Models\TaskUser;
 use App\Models\User;
 use App\Models\UserGroup;
 use Illuminate\Http\Request;
-use Mockery\Matcher\Any;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
+/**
+ * Task controller
+ */
 class TaskController extends Controller
 {
 
-    public function create(User $user)
+    /**
+     * Displays the form for creating a task
+     *
+     * @param User $user
+     * @return View
+     */
+    public function create(User $user) : View
     {
         $groups = $user->groups;
         return view('task', compact('groups', 'user'));
     }
 
-    public function adminCreate(Group $group)
+    /**
+     * Displays the form for creating a task for a specific group
+     *
+     * @param Group $group
+     * @return View
+     */
+    public function adminCreate(Group $group) : View
     {
         return view('task', compact('group'));
     }
-    public function storeGroup(Request $request, Group $group)
+
+    /**
+     * Creates a task in the chosen group and in the profile of all users in the group.
+     *
+     * @param Request $request
+     * @param Group $group
+     * @return RedirectResponse
+     */
+    public function storeGroup(Request $request, Group $group) : RedirectResponse
     {
         $request->validate([
             'start' => 'required|date',
@@ -59,7 +83,14 @@ class TaskController extends Controller
         return redirect()->route('groups.show', $group);
     }
 
-    public function store(Request $request, User $user)
+    /**
+     * Creates an individual or group task, as the user chooses
+     *
+     * @param Request $request
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function store(Request $request, User $user) : RedirectResponse
     {
         $request->validate([
             'start' => 'required|date',
@@ -98,11 +129,4 @@ class TaskController extends Controller
         return redirect()->route('users.show', $user);
     }
 
-    public function destroy(Task $task)
-    {
-
-        $task->delete();
-
-        return redirect()->route('/');
-    }
 }

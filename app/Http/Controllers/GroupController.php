@@ -8,18 +8,32 @@ use App\Models\TaskUser;
 use App\Models\User;
 use App\Models\UserGroup;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
+/**
+ * This is the group controller
+ */
 class GroupController extends Controller
 {
-    public function index()
+    /**
+     * Show all users
+     *
+     * @return View of all groups
+     */
+    public function index() : View
     {
 
         $groups = Group::OrderBy('id', 'desc')->paginate();
         return view('groups.index', compact('groups'));
     }
 
-    public function create()
+    /**
+     * Displays the form to create a group
+     *
+     * @return View with group creation form
+     */
+    public function create() : View
     {
 
         $users = User::all();
@@ -27,7 +41,14 @@ class GroupController extends Controller
         return view('groups.create', compact('users'));
     }
 
-    public function store(Request $request)
+
+    /**
+     * Create the group
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request) : RedirectResponse
     {
         $request->validate([
             'name' => 'required|unique:groups|max:121',
@@ -49,7 +70,13 @@ class GroupController extends Controller
         return redirect()->route('groups.show', $group);
     }
 
-    public function show(Group $group)
+    /**
+     * Show the view of the group
+     *
+     * @param Group $group
+     * @return View
+     */
+    public function show(Group $group) : View
     {
 
         $users = $group->users;
@@ -64,7 +91,14 @@ class GroupController extends Controller
     }
 
 
-    public function update(Request $request, Group $group)
+    /**
+     * Update the name of the group
+     *
+     * @param Request $request
+     * @param Group $group
+     * @return RedirectResponse
+     */
+    public function update(Request $request, Group $group) : RedirectResponse
     {
         $request->validate([
             'name' => 'required|unique:groups,name,' . $group->id . '|max:121',
@@ -77,28 +111,64 @@ class GroupController extends Controller
         return redirect()->route('groups.show', $group);
     }
 
-    public function editUsersGroup(Request $request, Group $group)
+
+    /**
+     * Show the form for adding users
+     *
+     * @param Request $request
+     * @param Group $group
+     * @return View
+     */
+    public function editUsersGroup(Request $request, Group $group) : View
     {
 
         return view('groups.show', compact('group'));
     }
 
-    public function destroy(Group $group, User $user)
+    /**
+     * Delete a group
+     *
+     * @param Group $group
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function destroy(Group $group, User $user) : RedirectResponse
     {
         $group->delete();
 
         return redirect()->route('groups.index');
     }
 
-    public function deleteUser(User $user, int $groupId)
+    /**
+     * Deletes the user from a group and his tasks from the profile
+     *
+     * @param User $user
+     * @param integer $groupId
+     * @return RedirectResponse
+     */
+    public function deleteUser(User $user, int $groupId) : RedirectResponse
     {
         $group = Group::find($groupId);
         $userFromGroup = UserGroup::where('user_id', $user->id)->where('group_id', $groupId)->first();
+        $tasksfromGroup = TaskUser::where('user_id', $user->id)->where('group_id', $groupId)->get();
+
+        foreach ($tasksfromGroup as $taskfromGroup) {
+            $taskfromGroup->delete();
+        }
+
         $userFromGroup->delete();
         return redirect()->route('groups.show', $group);
     }
 
-    public function deleteTask(Group $group, int $taskId)
+
+    /**
+     * Delete the task from the group
+     *
+     * @param Group $group
+     * @param integer $taskId
+     * @return RedirectResponse
+     */
+    public function deleteTask(Group $group, int $taskId) : RedirectResponse
     {
 
         $task = Task::find($taskId);
@@ -114,7 +184,13 @@ class GroupController extends Controller
         return redirect()->route('groups.show', $group);
     }
 
-    public function editUsers(Group $group)
+    /**
+     * Displays the form for adding users to the group
+     *
+     * @param Group $group
+     * @return View
+     */
+    public function editUsers(Group $group) : View
     {
 
         $oldUsers = $group->users;
@@ -123,7 +199,14 @@ class GroupController extends Controller
         return view('groups.editUsers', compact('group', 'users', 'oldUsers'));
     }
 
-    public function updateUsers(Request $request, Group $group)
+    /**
+     * Adds users to the group and adds the group's tasks to the user's profile
+     *
+     * @param Request $request
+     * @param Group $group
+     * @return RedirectResponse
+     */
+    public function updateUsers(Request $request, Group $group) : RedirectResponse
     {
 
         $request->validate([

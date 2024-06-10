@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
+/**
+ * Home page controller
+ */
 class HomeController extends Controller
 {
-    public function __invoke()
+    /**
+     * Undocumented function
+     *
+     * @return View
+     */
+    public function __invoke() : View
     {
-        // return view('welcome');
         return view('home');   
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class EnsureUserIsAuthorized
+class RedirectIfAuthenticated
 {
     /**
      * Handle an incoming request.
@@ -16,13 +16,10 @@ class EnsureUserIsAuthorized
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-        $user = $request->route('user');
-        
-        if ($user->id == Auth::id() || Auth::user()->admin) {
-            return $next($request);
+        if (Auth::check()) {
+            return redirect('/home');
         }
 
-        return redirect()->route('users.index');
+        return $next($request);
     }
 }

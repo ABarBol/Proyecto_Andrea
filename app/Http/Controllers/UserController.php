@@ -10,12 +10,21 @@ use App\Models\User;
 use App\Models\UserGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-use function PHPUnit\Framework\isNull;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
-    public function index()
+
+    /**
+     * Displays the list of users, if you are the administrator, provides you with a selection menu.
+     *
+     * @return View
+     */
+    public function index(): View
     {
 
         $users = User::OrderBy('id', 'desc')->paginate();
@@ -23,7 +32,15 @@ class UserController extends Controller
         return view('users.index', compact('users', 'allUsers'));
     }
 
-    public function search(Request $request, User $user)
+
+    /**
+     * Returns the selected user or displays the user view.
+     *
+     * @param Request $request
+     * @param User $user
+     * @return View
+     */
+    public function search(Request $request, User $user): View
     {
 
         if (isset($request->user_id)) {
@@ -37,7 +54,13 @@ class UserController extends Controller
     }
 
 
-    public function register(StoreUser $request)
+    /**
+     * Register a user after filling in the registration form
+     *
+     * @param StoreUser $request
+     * @return RedirectResponse
+     */
+    public function register(StoreUser $request): RedirectResponse
     {
         $user = User::create($request->all());
 
@@ -46,7 +69,13 @@ class UserController extends Controller
         return redirect()->route('users.show', $user);
     }
 
-    public function show(User $user)
+    /**
+     * Displays the user's tasks
+     *
+     * @param User $user
+     * @return View
+     */
+    public function show(User $user): View
     {
         $tasks = $user->tasks->map(function ($task) use ($user) {
             $userTask = TaskUser::where('task_id', $task->id)->where('user_id', $user->id)->first();
@@ -62,12 +91,26 @@ class UserController extends Controller
         return view('users.show', compact('user', 'tasks', 'groups'));
     }
 
-    public function edit(User $user)
+
+    /**
+     * Displays the user edit form
+     *
+     * @param User $user
+     * @return View
+     */
+    public function edit(User $user): View
     {
         return view('users.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user)
+    /**
+     * Update the user
+     *
+     * @param Request $request
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function update(Request $request, User $user): RedirectResponse
     {
         if (empty($request->input('password'))) {
             $request->merge(['password' => $user->password]);
@@ -79,11 +122,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => [
                 'required',
-                'min:7', 
-                'regex:/[a-z]/', 
-                'regex:/[A-Z]/', 
-                'regex:/[0-9]/', 
-                'regex:/[@$!%*#?&]/'
+                Password::min(7)->letters()->mixedCase()->symbols()
             ]
         ]);
 
@@ -93,7 +132,14 @@ class UserController extends Controller
         return redirect()->route('users.show', $user);
     }
 
-    public function destroy(User $user, Request $request)
+    /**
+     * Remove a user and delete their session
+     *
+     * @param User $user
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function destroy(User $user, Request $request): RedirectResponse
     {
 
         if ($user->id != 1) {
@@ -112,7 +158,14 @@ class UserController extends Controller
         return redirect()->route('users.show', Auth::user())->withErrors(['msg' => 'El administrador no puede borrarse a sí mismo']);
     }
 
-    public function deleteTask(User $user, int $taskId)
+    /**
+     * Deletes a task from the user's profile, if it is not a group task, deletes it permanently
+     *
+     * @param User $user
+     * @param integer $taskId
+     * @return RedirectResponse
+     */
+    public function deleteTask(User $user, int $taskId): RedirectResponse
     {
         $taskFromUser = TaskUser::where('user_id', $user->id)->where('task_id', $taskId)->first();
 
@@ -127,7 +180,13 @@ class UserController extends Controller
     }
 
 
-    public function login(Request $request)
+    /**
+     * Processes user login
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function login(Request $request) : RedirectResponse
     {
         $credentials = $request->validate([
             'email' => 'required|email',
@@ -145,7 +204,13 @@ class UserController extends Controller
             ->withInput();
     }
 
-    public function logout(Request $request)
+    /**
+     * Log out the user of the session
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function logout(Request $request) : RedirectResponse
     {
         Auth::logout();
         $request->session()->invalidate();

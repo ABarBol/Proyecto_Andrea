@@ -182,5 +182,4 @@ return [
         'end' => 'Fecha fin',
         'users' => 'usuarios'
     ],
-
 ];
