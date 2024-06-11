@@ -14,14 +14,13 @@
             @csrf
             @method('put')
             <div class="row align-items-center">
-                <div class="col-3">
+                <div class="col-auto">
                     <div class="input-group mb-2">
                         <input type="text" class="form-control" id="name" name="name"
                             placeholder="Nuevo nombre de grupo">
                     </div>
                 </div>
-
-                <div class="col-3">
+                <div class="col-auto">
                     <button type="submit" class="btn btn-primary mb-2">Cambiar el nombre grupo</button>
                 </div>
                 @error('name')
