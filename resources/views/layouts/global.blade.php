@@ -89,7 +89,7 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-6">
                     <div class="row d-flex justify-content-center p-4">
-                        <img src="../img/global.svg" class="img-fluid" alt="Responsive image">
+                        <img src="../img/global.svg" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
