@@ -49,7 +49,7 @@
                 </form>
             </div>
             <div class="col-12 col-md-6">
-                <img class="img-fluid rounded-lg-3" src="https://ximg.es/700x700/000/fff" alt="">
+                <img class="img-fluid rounded-lg-3 p-5" src="../../img/edit.svg" alt="">
             </div>
         </div>
     </div>

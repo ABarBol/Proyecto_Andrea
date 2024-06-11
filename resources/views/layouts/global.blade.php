@@ -86,14 +86,19 @@
         </main>
         <aside role="aside" class="container">
             <div class="pb-2 border-bottom"></div>
-            <div class="row d-flex justify-content-center p-4">
-                <img src="https://ximg.es/1000x300/000/fff" class="img-fluid" alt="Responsive image">
+            <div class="row d-flex justify-content-center">
+                <div class="col-6">
+                    <div class="row d-flex justify-content-center p-4">
+                        <img src="../img/global.svg" class="img-fluid" alt="Responsive image">
+                    </div>
+                </div>
             </div>
         </aside>
         <footer class="footer mt-auto py-3 bg-light">
             <div class="container">
                 <h5>Política de Privacidad y Seguridad.</h5>
-                <p><strong> Scheduly</strong> es una aplicación diseñada para uso interno, el administrador puede reservarse el derecho de inspeccionar y
+                <p><strong> Scheduly</strong> es una aplicación diseñada para uso interno, el administrador puede
+                    reservarse el derecho de inspeccionar y
                     modificar la información del usuarios para asegurar el
                     correcto funcionamiento de la página, pudiendo incluso, reestablecer contraseñas.</b>
                 <p>Estas medidas permiten mantener una página segura y funcional.</p>

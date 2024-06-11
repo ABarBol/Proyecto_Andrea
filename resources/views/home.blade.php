@@ -16,7 +16,7 @@
         @endguest
       </div>
       <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden">
-          <img class="img-fluid rounded-lg-3" src="https://ximg.es/700x700/000/fff" alt="">
+          <img class="img-fluid rounded-lg-3" src="../img/home.png" alt="">
       </div>
     </div>
   </div>
