@@ -3,7 +3,7 @@
 @section('title', 'Login')
 
 @section('content')
-    <h1 class="pb-5">Registro</h1>
+    <h1 class="pb-5">Log in</h1>
     <div class="container">
         <div class="row border rounded bg-light">
             <div class="col-12 col-md-6">
