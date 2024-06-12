@@ -116,6 +116,7 @@
             </div>
         @endif
     </div>
+    @if (Auth::user()->admin)
     <div class="bg-light p-5 rounded">
 
         <div class="d-flex justify-content-end pt-5">
@@ -129,5 +130,6 @@
             </form>
         </div>
     </div>
+    @endif
 
 @endsection
