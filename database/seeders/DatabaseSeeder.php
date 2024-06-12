@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
 
         $task = Task::factory()->create([
             'start' => now(),
-            'name' => 'My frist Task',
+            'name' => 'My first Task',
             'description' => 'This is my first Task',
             'color' => 'red'
         ]);
