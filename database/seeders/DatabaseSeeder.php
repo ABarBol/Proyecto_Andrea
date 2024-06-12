@@ -7,6 +7,7 @@ use App\Models\Group;
 use App\Models\Task;
 use App\Models\TaskUser;
 use App\Models\User;
+use Carbon\Carbon;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -40,7 +41,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $task = Task::factory()->create([
-            'start' => now(),
+            'start' => Carbon::now(),
+            'end' => Carbon::now()->addDay(),
             'name' => 'My first Task',
             'description' => 'This is my first Task',
             'color' => 'red'
