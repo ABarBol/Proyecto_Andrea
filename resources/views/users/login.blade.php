@@ -21,7 +21,7 @@
                         <div class="form-group mt-3">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email" name="email"
-                                value="{{ old('email') }}" aria-describedby="emailInfo" placeholder="Introduzca su email">
+                                value="{{ old('email') }}" placeholder="Introduzca su email">
                         </div>
                         @error('email')
                             <span class="text-danger">{{ $message }}</span>

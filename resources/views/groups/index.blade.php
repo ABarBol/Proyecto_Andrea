@@ -14,7 +14,7 @@
                 <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                     <div class="d-flex justify-content-between align-items-center w-100">
                         <strong class="text-gray-dark">{{ $group->name }}</strong>
-                        <a href="{{ route('groups.show', $group->id) }}"><i class="fa-solid fa-user-group fa-3x"></i></a>
+                        <a href="{{ route('groups.show', $group->id) }}"><i class="fa-solid fa-user-group fa-3x"></i><span class="sr-only">Ver el grupo {{ $group->name }}</span></a>
                     </div>
                     <span class="d-block">{{ $group->email }}</span>
                 </div>

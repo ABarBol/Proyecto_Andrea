@@ -21,12 +21,12 @@
         @if (Auth::user()->id == $user->id)
             <p class="lead">Este es tu espacio personal dentro de nuestra página web, puedes:</p>
             <a class="btn btn-lg btn-primary" href="{{ route('users.edit', $user) }}" role="button">Actualizar tu perfil</a>
-            <a class="btn btn-lg btn-outline-secondary" href="{{ route('calendar.show', $user->id) }}" role="button">Ir a tu
+            <a class="btn btn-lg btn-outline-dark" href="{{ route('calendar.show', $user->id) }}" role="button">Ir a tu
                 calendario</a>
         @elseif (Auth::user()->admin)
             <p class="lead">Administración de usuario</p>
             <a class="btn btn-lg btn-primary" href="{{ route('users.edit', $user) }}" role="button">Editar perfil</a>
-            <a class="btn btn-lg btn-outline-secondary" href="{{ route('calendar.show', $user->id) }}"
+            <a class="btn btn-lg btn-outline-dark" href="{{ route('calendar.show', $user->id) }}"
                 role="button">Revisar Calendario</a>
         @endif
 
@@ -55,7 +55,7 @@
                             <h5 class="mb-1">{{ $task->name }}
                                 @if (isset($task->groupOfTask->name))
                                     <a href="{{ route('groups.show', $task->groupOfTask) }}" type="button"
-                                        class="btn btn-outline-info">
+                                        class="btn btn-outline-primary">
                                         {{ $task->groupOfTask->name }}
                                     </a>
                                 @endif
@@ -71,7 +71,7 @@
 
                             @method('delete')
 
-                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i><span class="sr-only">Eliminar tarea</span></button>
                         </form>
                     </div>
                     <span class="badge text-bg-primary rounded-pill"><i class="fa-regular fa-calendar"></i>
@@ -102,7 +102,7 @@
                             <h5 class="mb-1">{{ $group->name }}</h5>
                         </div>
                         <a href="{{ route('groups.show', $group) }}" type="button"
-                        class="btn btn-outline-info">Ver grupo
+                        class="btn btn-outline-primary">Ver grupo
                     </a>
                     @if (Auth::user()->admin)
                         <form action="{{ route('groups.deleteUser', ['user' => $user, 'groupId' => $group->id]) }}"
@@ -112,7 +112,7 @@
 
                             @method('delete')
 
-                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i><span class="sr-only">Eliminar usuario</span></button>
                         </form>
                     </div>
                     @endif

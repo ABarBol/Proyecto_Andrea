@@ -32,7 +32,7 @@
 
                         <div class="form-group mt-3">
                             <label for="users">Usuarios del grupo</label>
-                            <select class="form-select js-example-basic-multiple" name="users[]" multiple="multiple">
+                            <select class="form-select js-example-basic-multiple" id="users" name="users[]" multiple="multiple">
                                 <option value=""></option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}"

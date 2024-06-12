@@ -20,8 +20,8 @@
 
             @csrf
             <div class="form-group">
-                <label for="search">Buscar usuario:</label>
-                <select class="form-select js-example-basic-single" name="user_id">
+                <label for="user_id">Buscar usuario:</label>
+                <select class="form-select js-example-basic-single" name="user_id" id="user_id">
                     <option value=""></option>
                     @foreach ($allUsers as $user)
                         <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -39,7 +39,7 @@
                     <div class="d-flex justify-content-between align-items-center w-100">
                         <strong class="text-gray-dark">{{ $user->name }}</strong>
                         @if (Auth::user()->admin)
-                            <a href="{{ route('users.show', $user->id) }}"><i class="fa-solid fa-circle-user fa-3x"></i></a>
+                            <a href="{{ route('users.show', $user->id) }}"><i class="fa-solid fa-circle-user fa-3x"></i><span class="sr-only">Ver el usuario {{ $user->name }}</span></a>
                         @endif
                     </div>
                     <span class="d-block">{{ $user->email }}</span>

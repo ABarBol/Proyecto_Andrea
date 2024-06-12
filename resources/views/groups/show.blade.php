@@ -16,8 +16,9 @@
             <div class="row align-items-center">
                 <div class="col-auto">
                     <div class="input-group mb-2">
+                        <label><span class="sr-only">Nuevo nombre del grupo</span>
                         <input type="text" class="form-control" id="name" name="name"
-                            placeholder="Nuevo nombre de grupo">
+                            placeholder="Nuevo nombre de grupo"></label>
                     </div>
                 </div>
                 <div class="col-auto">
@@ -59,7 +60,7 @@
 
                             @method('delete')
 
-                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i><span class="sr-only">Eliminar tarea del grupo</span></button>
                         </form>
                     </div>
                     <span class="badge text-bg-danger rounded-pill"><i class="fa-regular fa-calendar"></i>
@@ -96,7 +97,7 @@
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger"><i
-                                                class="fa-solid fa-trash-can"></i></button>
+                                                class="fa-solid fa-trash-can"></i><span class="sr-only">Eliminar usuario de grupo</span></button>
                                     </form>
                                 </div>
                             </div>

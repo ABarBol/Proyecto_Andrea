@@ -24,8 +24,7 @@
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg"
-                    aria-labelledby="navbarOffcanvasLgLabel">
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
@@ -37,25 +36,25 @@
                                 <li class="nav-item">
                                     <a class="nav-link {{ Route::currentRouteName() === 'home.show' ? 'active' : '' }}"
                                         aria-current="page" href="{{ route('home.show') }}"><i
-                                            class="fa-solid fa-house"></i></a>
+                                            class="fa-solid fa-house"></i><span class="sr-only">Inicio</span></a>
                                 </li>
                             @endguest
                             @auth
                                 <li class="nav-item">
                                     <a class="nav-link {{ Route::currentRouteName() === 'users.show' ? 'active' : '' }}"
                                         aria-current="page" href="{{ route('users.show', Auth::user()) }}"><i
-                                            class="fa-solid fa-house"></i></a>
+                                            class="fa-solid fa-house"></i><span class="sr-only">Inicio</span></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ Route::currentRouteName() === 'users.index' ? 'active' : '' }}"
-                                        href="{{ route('users.index') }}"><i class="fa-solid fa-users"></i></a>
+                                        href="{{ route('users.index') }}"><i class="fa-solid fa-users"></i><span class="sr-only">Usuarios</span></a>
                                 </li>
 
                                 @if (Auth::user()->admin)
                                     <li class="nav-item">
                                         <a class="nav-link {{ Route::currentRouteName() === 'groups.index' ? 'active' : '' }}"
                                             href="{{ route('groups.index') }}"><i
-                                                class="fa-solid fa-users-viewfinder"></i></a>
+                                                class="fa-solid fa-users-viewfinder"></i><span class="sr-only">Grupos</span></a>
                                     </li>
                                 @endif
                             @endauth
@@ -67,7 +66,7 @@
                                         in</a>
                                 </li>
                                 <li class="nav-item p-1">
-                                    <a class="btn btn-outline-secondary btn-block" role="button"
+                                    <a class="btn btn-outline-dark btn-block" role="button"
                                         href="{{ route('register') }}">Registrarse</a>
                                 </li>
                             @else
