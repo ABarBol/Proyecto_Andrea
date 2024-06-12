@@ -102,7 +102,7 @@
                     modificar la información del usuarios para asegurar el
                     correcto funcionamiento de la página, pudiendo incluso, reestablecer contraseñas.</b>
                 <p>Estas medidas permiten mantener una página segura y funcional.</p>
-                <span class="text-muted">© 2024 Scheduly, S.A</span>
+                <span class="text-muted">© 2024 Scheduly</span>
             </div>
         </footer>
     </div>
