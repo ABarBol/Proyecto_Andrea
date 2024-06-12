@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Normal User',
             'email' => 'user@example.com',
             'password' => 'laravel',
-            'admin' => 1,
+            'admin' => 0,
         ]);
         User::factory(90)->create();
         Group::factory(50)->create();
