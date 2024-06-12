@@ -8,8 +8,6 @@ use App\Models\TaskUser;
 use App\Models\User;
 use App\Models\UserGroup;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 
 /**
  * This is the group controller
@@ -21,7 +19,7 @@ class GroupController extends Controller
      *
      * @return View of all groups
      */
-    public function index() : View
+    public function index() 
     {
 
         $groups = Group::OrderBy('id', 'desc')->paginate();
@@ -33,7 +31,7 @@ class GroupController extends Controller
      *
      * @return View with group creation form
      */
-    public function create() : View
+    public function create() 
     {
 
         $users = User::all();
@@ -48,7 +46,7 @@ class GroupController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(Request $request) : RedirectResponse
+    public function store(Request $request) 
     {
         $request->validate([
             'name' => 'required|unique:groups|max:121',
@@ -76,7 +74,7 @@ class GroupController extends Controller
      * @param Group $group
      * @return View
      */
-    public function show(Group $group) : View
+    public function show(Group $group) 
     {
 
         $users = $group->users;
@@ -98,7 +96,7 @@ class GroupController extends Controller
      * @param Group $group
      * @return RedirectResponse
      */
-    public function update(Request $request, Group $group) : RedirectResponse
+    public function update(Request $request, Group $group) 
     {
         $request->validate([
             'name' => 'required|unique:groups,name,' . $group->id . '|max:121',
@@ -119,7 +117,7 @@ class GroupController extends Controller
      * @param Group $group
      * @return View
      */
-    public function editUsersGroup(Request $request, Group $group) : View
+    public function editUsersGroup(Request $request, Group $group) 
     {
 
         return view('groups.show', compact('group'));
@@ -132,7 +130,7 @@ class GroupController extends Controller
      * @param User $user
      * @return RedirectResponse
      */
-    public function destroy(Group $group, User $user) : RedirectResponse
+    public function destroy(Group $group, User $user) 
     {
         $group->delete();
 
@@ -146,7 +144,7 @@ class GroupController extends Controller
      * @param integer $groupId
      * @return RedirectResponse
      */
-    public function deleteUser(User $user, int $groupId) : RedirectResponse
+    public function deleteUser(User $user, int $groupId) 
     {
         $group = Group::find($groupId);
         $userFromGroup = UserGroup::where('user_id', $user->id)->where('group_id', $groupId)->first();
@@ -168,7 +166,7 @@ class GroupController extends Controller
      * @param integer $taskId
      * @return RedirectResponse
      */
-    public function deleteTask(Group $group, int $taskId) : RedirectResponse
+    public function deleteTask(Group $group, int $taskId) 
     {
 
         $task = Task::find($taskId);
@@ -190,7 +188,7 @@ class GroupController extends Controller
      * @param Group $group
      * @return View
      */
-    public function editUsers(Group $group) : View
+    public function editUsers(Group $group) 
     {
 
         $oldUsers = $group->users;
@@ -206,7 +204,7 @@ class GroupController extends Controller
      * @param Group $group
      * @return RedirectResponse
      */
-    public function updateUsers(Request $request, Group $group) : RedirectResponse
+    public function updateUsers(Request $request, Group $group) 
     {
 
         $request->validate([

@@ -8,8 +8,6 @@ use App\Models\TaskUser;
 use App\Models\User;
 use App\Models\UserGroup;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 
 /**
  * Task controller
@@ -23,7 +21,7 @@ class TaskController extends Controller
      * @param User $user
      * @return View
      */
-    public function create(User $user) : View
+    public function create(User $user) 
     {
         $groups = $user->groups;
         return view('task', compact('groups', 'user'));
@@ -35,7 +33,7 @@ class TaskController extends Controller
      * @param Group $group
      * @return View
      */
-    public function adminCreate(Group $group) : View
+    public function adminCreate(Group $group) 
     {
         return view('task', compact('group'));
     }
@@ -47,7 +45,7 @@ class TaskController extends Controller
      * @param Group $group
      * @return RedirectResponse
      */
-    public function storeGroup(Request $request, Group $group) : RedirectResponse
+    public function storeGroup(Request $request, Group $group) 
     {
         $request->validate([
             'start' => 'required|date',
@@ -90,7 +88,7 @@ class TaskController extends Controller
      * @param User $user
      * @return RedirectResponse
      */
-    public function store(Request $request, User $user) : RedirectResponse
+    public function store(Request $request, User $user) 
     {
         $request->validate([
             'start' => 'required|date',

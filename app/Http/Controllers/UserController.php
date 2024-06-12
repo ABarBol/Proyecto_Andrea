@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -24,7 +22,7 @@ class UserController extends Controller
      *
      * @return View
      */
-    public function index(): View
+    public function index()
     {
 
         $users = User::OrderBy('id', 'desc')->paginate();
@@ -40,7 +38,7 @@ class UserController extends Controller
      * @param User $user
      * @return View
      */
-    public function search(Request $request, User $user): View
+    public function search(Request $request, User $user)
     {
 
         if (isset($request->user_id)) {
@@ -60,7 +58,7 @@ class UserController extends Controller
      * @param StoreUser $request
      * @return RedirectResponse
      */
-    public function register(StoreUser $request): RedirectResponse
+    public function register(StoreUser $request)
     {
         $user = User::create($request->all());
 
@@ -75,7 +73,7 @@ class UserController extends Controller
      * @param User $user
      * @return View
      */
-    public function show(User $user): View
+    public function show(User $user)
     {
         $tasks = $user->tasks->map(function ($task) use ($user) {
             $userTask = TaskUser::where('task_id', $task->id)->where('user_id', $user->id)->first();
@@ -98,7 +96,7 @@ class UserController extends Controller
      * @param User $user
      * @return View
      */
-    public function edit(User $user): View
+    public function edit(User $user)
     {
         return view('users.edit', compact('user'));
     }
@@ -110,7 +108,7 @@ class UserController extends Controller
      * @param User $user
      * @return RedirectResponse
      */
-    public function update(Request $request, User $user): RedirectResponse
+    public function update(Request $request, User $user)
     {
         if (empty($request->input('password'))) {
             $request->merge(['password' => $user->password]);
@@ -139,7 +137,7 @@ class UserController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function destroy(User $user, Request $request): RedirectResponse
+    public function destroy(User $user, Request $request)
     {
 
         if ($user->id != 1) {
@@ -165,7 +163,7 @@ class UserController extends Controller
      * @param integer $taskId
      * @return RedirectResponse
      */
-    public function deleteTask(User $user, int $taskId): RedirectResponse
+    public function deleteTask(User $user, int $taskId)
     {
         $taskFromUser = TaskUser::where('user_id', $user->id)->where('task_id', $taskId)->first();
 
@@ -186,7 +184,7 @@ class UserController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function login(Request $request) : RedirectResponse
+    public function login(Request $request) 
     {
         $credentials = $request->validate([
             'email' => 'required|email',
@@ -210,7 +208,7 @@ class UserController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function logout(Request $request) : RedirectResponse
+    public function logout(Request $request) 
     {
         Auth::logout();
         $request->session()->invalidate();
